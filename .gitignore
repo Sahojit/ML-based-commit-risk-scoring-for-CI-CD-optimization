@@ -1,5 +1,6 @@
 # ==============================================================================
-# ML COMMIT RISK PROJECT - .gitignore
+# ML COMMIT RISK SCORING PROJECT - .gitignore
+# Repository: https://github.com/Sahojit/ML-based-commit-risk-scoring-for-CI-CD-optimization
 # ==============================================================================
 
 # -----------------------------------------------------------------------------
@@ -9,6 +10,7 @@ venv/
 env/
 ENV/
 .venv/
+.virtualenv/
 
 # -----------------------------------------------------------------------------
 # PYTHON CACHE & COMPILED FILES
@@ -18,12 +20,29 @@ __pycache__/
 *$py.class
 *.so
 .Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
 # -----------------------------------------------------------------------------
 # JUPYTER NOTEBOOK CHECKPOINTS
 # -----------------------------------------------------------------------------
 .ipynb_checkpoints/
 *.ipynb_checkpoints
+profile_default/
+ipython_config.py
 
 # -----------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES & SECRETS (CRITICAL!)
@@ -31,10 +50,14 @@ __pycache__/
 .env
 .env.local
 .env.*.local
+.venv
 config/secrets.yaml
 config/.secrets/
 *.key
 *.pem
+*.p12
+credentials.json
+token.json
 
 # -----------------------------------------------------------------------------
 # DATABASE FILES (Local development only)
@@ -42,11 +65,20 @@ config/.secrets/
 *.db
 *.sqlite
 *.sqlite3
+*.db-shm
+*.db-wal
 
 # -----------------------------------------------------------------------------
-# MODEL FILES (Too large for Git)
+# MODEL FILES (Too large for Git - use MLflow registry or Git LFS)
 # -----------------------------------------------------------------------------
 models/registry/
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.pb
 *.pkl
 *.joblib
 *.h5
@@ -54,33 +86,48 @@ models/registry/
 *.pth
 *.onnx
 *.pb
+*.model
 
 # -----------------------------------------------------------------------------
-# DATA FILES (Too large for Git)
+# DATA FILES (Too large for Git - use cloud storage or DVC)
 # -----------------------------------------------------------------------------
 data/raw/*.csv
 data/raw/*.json
 data/raw/*.parquet
+data/raw/*.txt
+data/raw/*.xlsx
 data/processed/*.csv
 data/processed/*.json
+data/processed/*.parquet
 data/features/*.csv
+data/features/*.parquet
 
-# Keep the directory structure but ignore files
+# Keep directory structure but ignore files
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/features/.gitkeep
+!data/raw/README.md
+!data/processed/README.md
+!data/features/README.md
 
 # -----------------------------------------------------------------------------
-# LOGS (Temporary files)
+# LOGS (Temporary runtime files)
 # -----------------------------------------------------------------------------
 logs/*.log
 *.log
+logs/training/
+logs/inference/
+
+# Keep logs directory
+!logs/.gitkeep
+!logs/README.md
 
 # -----------------------------------------------------------------------------
 # MLFLOW ARTIFACTS
 # -----------------------------------------------------------------------------
 mlruns/
 mlartifacts/
+mlflow_outputs/
 
 # -----------------------------------------------------------------------------
 # IDE SETTINGS (VSCode, PyCharm, etc.)
@@ -90,6 +137,9 @@ mlartifacts/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.settings/
 
 # -----------------------------------------------------------------------------
 # OS FILES (Mac, Windows, Linux)
@@ -99,26 +149,31 @@ mlartifacts/
 ._*
 .Spotlight-V100
 .Trashes
-Thumbs.db
 ehthumbs.db
+Thumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
 # -----------------------------------------------------------------------------
 # PYTEST & COVERAGE
 # -----------------------------------------------------------------------------
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
 .tox/
 .cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
 
 # -----------------------------------------------------------------------------
-# BUILD & DISTRIBUTION
+# MYPY TYPE CHECKING
 # -----------------------------------------------------------------------------
-build/
-dist/
-*.egg-info/
-.eggs/
+.mypy_cache/
+.dmypy.json
+dmypy.json
 
 # -----------------------------------------------------------------------------
 # TEMPORARY FILES
@@ -127,11 +182,25 @@ dist/
 *.temp
 *.bak
 *.swp
+*~
+.#*
 
 # -----------------------------------------------------------------------------
-# JUPYTER NOTEBOOK OUTPUT
+# DOCUMENTATION BUILD
 # -----------------------------------------------------------------------------
-*.nbconvert.ipynb
+docs/_build/
+docs/.doctrees/
+site/
+
+# -----------------------------------------------------------------------------
+# FASTAPI / UVICORN
+# -----------------------------------------------------------------------------
+*.pid
+
+# -----------------------------------------------------------------------------
+# STREAMLIT
+# -----------------------------------------------------------------------------
+.streamlit/secrets.toml
 
 # ==============================================================================
 # END OF .gitignore
