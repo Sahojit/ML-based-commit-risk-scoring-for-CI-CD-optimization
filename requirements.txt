@@ -1,0 +1,51 @@
+# Core Data Processing (newer versions for Python 3.14)
+pandas>=2.2.0
+numpy>=1.26.0
+
+# Database
+psycopg2-binary>=2.9.9
+SQLAlchemy>=2.0.23
+
+# Machine Learning
+scikit-learn>=1.4.0
+xgboost>=2.0.3
+imbalanced-learn>=0.12.0
+
+# Experiment Tracking
+mlflow>=2.10.0
+
+# API & Web Service
+fastapi>=0.109.0
+uvicorn[standard]>=0.25.0
+pydantic>=2.5.3
+
+# Git Integration
+GitPython>=3.1.40
+PyGithub>=2.1.1
+
+# Visualization
+streamlit>=1.30.0
+matplotlib>=3.8.0
+plotly>=5.18.0
+seaborn>=0.13.0
+
+# LLM for Explainability
+openai>=1.6.1
+
+# Configuration Management
+pyyaml>=6.0.1
+python-dotenv>=1.0.0
+
+# Logging & Utilities
+python-json-logger>=2.0.7
+
+# Testing
+pytest>=7.4.3
+pytest-cov>=4.1.0
+httpx>=0.26.0
+
+# Development Tools
+jupyter>=1.0.0
+ipython>=8.19.0
+black>=23.12.1
+flake8>=7.0.0
