@@ -1,0 +1,152 @@
+# ==============================================================================
+# ML COMMIT RISK SCORING - MAIN CONFIGURATION
+# ==============================================================================
+
+project:
+  name: "ML Commit Risk Scoring"
+  version: "0.1.0"
+  description: "Predict commit bug risk and optimize CI/CD testing"
+
+# -----------------------------------------------------------------------------
+# DATA INGESTION SETTINGS
+# -----------------------------------------------------------------------------
+data_ingestion:
+  repo_owner: "example-org"
+  repo_name: "example-repo"
+  max_commits: 1000
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  raw_data_path: "data/raw/commits.csv"
+
+# -----------------------------------------------------------------------------
+# LABEL GENERATION SETTINGS
+# -----------------------------------------------------------------------------
+label_generation:
+  bug_keywords:
+    - "fix"
+    - "bug"
+    - "error"
+    - "issue"
+    - "patch"
+    - "hotfix"
+  min_confidence: 0.7
+
+# -----------------------------------------------------------------------------
+# FEATURE ENGINEERING SETTINGS
+# -----------------------------------------------------------------------------
+features:
+  commit_features:
+    - lines_added
+    - lines_deleted
+    - total_churn
+    - files_changed
+    - touches_core_module
+    - touches_test_files
+  
+  developer_features:
+    - total_previous_commits
+    - historical_bug_rate
+    - recent_commit_frequency
+  
+  temporal_features:
+    - hour_of_day
+    - day_of_week
+    - weekend_flag
+  
+  core_modules:
+    - "src/core/"
+    - "src/api/"
+    - "src/models/"
+
+# -----------------------------------------------------------------------------
+# MODEL TRAINING SETTINGS
+# -----------------------------------------------------------------------------
+training:
+  test_size: 0.2
+  random_state: 42
+  use_time_split: true
+  handle_imbalance: true
+  imbalance_method: "SMOTE"
+  
+  models:
+    logistic_regression:
+      enabled: true
+      params:
+        C: 1.0
+        max_iter: 1000
+        class_weight: "balanced"
+    
+    xgboost:
+      enabled: true
+      params:
+        max_depth: 6
+        learning_rate: 0.1
+        n_estimators: 100
+        scale_pos_weight: 5
+
+# -----------------------------------------------------------------------------
+# MODEL EVALUATION SETTINGS
+# -----------------------------------------------------------------------------
+evaluation:
+  metrics:
+    - recall
+    - precision
+    - f1_score
+    - roc_auc
+  primary_metric: "recall"
+  default_threshold: 0.5
+
+# -----------------------------------------------------------------------------
+# DECISION ENGINE SETTINGS
+# -----------------------------------------------------------------------------
+decision_engine:
+  thresholds:
+    high_risk: 0.7
+    medium_risk: 0.4
+    low_risk: 0.0
+  
+  test_strategies:
+    smoke_tests:
+      duration_minutes: 5
+      coverage: "critical_paths"
+    
+    extended_tests:
+      duration_minutes: 15
+      coverage: "integration"
+    
+    full_tests:
+      duration_minutes: 45
+      coverage: "all"
+
+# -----------------------------------------------------------------------------
+# INFERENCE API SETTINGS
+# -----------------------------------------------------------------------------
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  workers: 4
+  model_path: "models/registry/production_model.pkl"
+  timeout_seconds: 30
+
+# -----------------------------------------------------------------------------
+# MONITORING SETTINGS
+# -----------------------------------------------------------------------------
+monitoring:
+  dashboard_refresh_seconds: 60
+  
+  drift_detection:
+    enabled: true
+    check_interval_hours: 24
+    drift_threshold: 0.1
+  
+  log_level: "INFO"
+  log_file: "logs/app.log"
+
+# -----------------------------------------------------------------------------
+# MLFLOW SETTINGS
+# -----------------------------------------------------------------------------
+mlflow:
+  tracking_uri: "file:./models/registry"
+  experiment_name: "commit_risk_scoring"
+  autolog: true

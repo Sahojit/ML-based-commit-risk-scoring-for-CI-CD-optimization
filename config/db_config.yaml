@@ -1,0 +1,140 @@
+# ==============================================================================
+# DATABASE CONFIGURATION
+# ==============================================================================
+
+# -----------------------------------------------------------------------------
+# POSTGRESQL CONNECTION SETTINGS
+# -----------------------------------------------------------------------------
+database:
+  # Database type
+  type: "postgresql"
+  
+  # Connection parameters (use environment variables for sensitive data)
+  host: "${DB_HOST:localhost}"           # Default: localhost
+  port: "${DB_PORT:5432}"                # Default: 5432
+  database: "${DB_NAME:commit_risk_db}"  # Default: commit_risk_db
+  
+  # Credentials (NEVER hardcode these!)
+  # These will be loaded from .env file
+  username: "${DB_USERNAME}"
+  password: "${DB_PASSWORD}"
+  
+  # Connection pool settings
+  pool:
+    min_size: 2
+    max_size: 10
+    timeout_seconds: 30
+  
+  # SQLAlchemy connection string
+  # Format: postgresql://username:password@host:port/database
+  # Will be constructed from above values
+
+# -----------------------------------------------------------------------------
+# TABLE SCHEMAS
+# -----------------------------------------------------------------------------
+tables:
+  # Raw commit data
+  raw_commits:
+    name: "raw_commits"
+    columns:
+      - commit_hash
+      - author
+      - timestamp
+      - message
+      - files_changed
+      - lines_added
+      - lines_deleted
+      - created_at
+  
+  # Bug labels
+  labels:
+    name: "labels"
+    columns:
+      - commit_hash
+      - is_buggy
+      - labeled_by
+      - confidence
+      - created_at
+  
+  # Engineered features
+  commit_features:
+    name: "commit_features"
+    columns:
+      - commit_hash
+      - lines_added
+      - lines_deleted
+      - total_churn
+      - files_changed
+      - touches_core
+      - touches_tests
+      - hour_of_day
+      - day_of_week
+      - is_weekend
+      - created_at
+  
+  # Developer statistics
+  developer_features:
+    name: "developer_features"
+    columns:
+      - author
+      - total_commits
+      - bug_rate
+      - recent_frequency
+      - updated_at
+  
+  # Prediction logs
+  predictions:
+    name: "predictions"
+    columns:
+      - id
+      - commit_hash
+      - risk_score
+      - model_version
+      - predicted_at
+  
+  # Decision logs
+  decisions:
+    name: "decisions"
+    columns:
+      - id
+      - prediction_id
+      - decision
+      - threshold_used
+      - created_at
+  
+  # Explanations
+  explanations:
+    name: "explanations"
+    columns:
+      - id
+      - prediction_id
+      - explanation_text
+      - top_features
+      - created_at
+  
+  # Model metadata
+  model_metadata:
+    name: "model_metadata"
+    columns:
+      - model_version
+      - model_path
+      - metrics
+      - deployed_at
+      - status
+
+# -----------------------------------------------------------------------------
+# DATABASE INITIALIZATION
+# -----------------------------------------------------------------------------
+initialization:
+  # Create tables on startup if they don't exist
+  auto_create_tables: true
+  
+  # Drop existing tables (DANGEROUS - only use in dev!)
+  drop_existing: false
+  
+  # Run migrations
+  run_migrations: false
+
+# ==============================================================================
+# END OF DATABASE CONFIGURATION
+# ==============================================================================
