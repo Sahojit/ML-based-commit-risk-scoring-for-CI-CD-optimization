@@ -49,3 +49,6 @@ jupyter>=1.0.0
 ipython>=8.19.0
 black>=23.12.1
 flake8>=7.0.0
+# LLM for Explainability
+openai>=1.6.1
+google-generativeai>=0.3.0
