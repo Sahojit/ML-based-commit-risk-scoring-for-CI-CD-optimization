@@ -10,12 +10,22 @@ project:
 # -----------------------------------------------------------------------------
 # DATA INGESTION SETTINGS
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# DATA INGESTION SETTINGS
+# -----------------------------------------------------------------------------
 data_ingestion:
-  repo_owner: "example-org"
-  repo_name: "example-repo"
-  max_commits: 1000
+  # GitHub repository to analyze
+  repo_owner: "Sahojit"
+  repo_name: "ML-based-commit-risk-scoring-for-CI-CD-optimization"
+  
+  # How many commits to fetch
+  max_commits: 100
+  
+  # Date range for historical data (optional)
   start_date: "2024-01-01"
   end_date: "2024-12-31"
+  
+  # Output paths
   raw_data_path: "data/raw/commits.csv"
 
 # -----------------------------------------------------------------------------
