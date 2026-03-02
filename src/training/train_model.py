@@ -95,9 +95,17 @@ class ModelTrainer:
             y_test = y.iloc[split_idx:]
         else:
             logger.info("Using random train/test split")
+            
+            # Check if stratification is possible
+            min_class_count = y.value_counts().min()
+            use_stratify = min_class_count >= 2
+            
+            if not use_stratify:
+                logger.warning(f"⚠️  Stratification disabled: minority class has only {min_class_count} sample(s)")
+            
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=test_size, random_state=random_state,
-                stratify=y
+                stratify=y if use_stratify else None
             )
         
         logger.info(f"Training set: {len(X_train)} samples")
@@ -129,7 +137,21 @@ class ModelTrainer:
         """
         logger.info(f"Handling class imbalance using: {method}")
         
+        # Check if we have both classes
+        n_classes = y_train.nunique()
+        if n_classes < 2:
+            logger.warning(f"⚠️  Only {n_classes} class in training data. Skipping imbalance handling.")
+            return X_train, y_train
+        
+        # Check minimum samples per class for SMOTE
+        min_samples = y_train.value_counts().min()
+        
         if method == 'smote':
+            if min_samples < 2:
+                logger.warning(f"⚠️  SMOTE requires at least 2 samples per class. "
+                             f"Found {min_samples}. Using class_weight instead.")
+                return X_train, y_train
+            
             smote = SMOTE(random_state=42)
             X_train, y_train = smote.fit_resample(X_train, y_train)
             logger.info(f"After SMOTE: {len(X_train)} samples")

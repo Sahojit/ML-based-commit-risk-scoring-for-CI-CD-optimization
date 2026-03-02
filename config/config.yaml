@@ -15,11 +15,11 @@ project:
 # -----------------------------------------------------------------------------
 data_ingestion:
   # GitHub repository to analyze
-  repo_owner: "Sahojit"
-  repo_name: "ML-based-commit-risk-scoring-for-CI-CD-optimization"
+  repo_owner: "pandas-dev"  # ← Change from "Sahojit"
+  repo_name: "pandas"       # ← Change from your repo
   
   # How many commits to fetch
-  max_commits: 500
+  max_commits: 200          # ← Keep this
   
   # Date range for historical data (optional)
   start_date: "2024-01-01"
