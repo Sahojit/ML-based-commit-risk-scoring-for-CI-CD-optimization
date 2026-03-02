@@ -19,7 +19,7 @@ data_ingestion:
   repo_name: "ML-based-commit-risk-scoring-for-CI-CD-optimization"
   
   # How many commits to fetch
-  max_commits: 100
+  max_commits: 500
   
   # Date range for historical data (optional)
   start_date: "2024-01-01"
