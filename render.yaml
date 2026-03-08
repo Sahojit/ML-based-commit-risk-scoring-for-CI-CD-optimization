@@ -18,7 +18,7 @@ services:
   - type: web
     name: commit-risk-dashboard
     runtime: python
-    buildCommand: pip install streamlit plotly pandas numpy scikit-learn xgboost joblib pyyaml python-dotenv
+    buildCommand: pip install -r requirements-dashboard.txt
     startCommand: streamlit run dashboard_v2.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
     plan: free
     envVars:
@@ -26,4 +26,4 @@ services:
         value: models/advanced_xgboost.pkl
       # Point the dashboard at the deployed API
       - key: API_URL
-        value: https://commit-risk-api.onrender.com   # update after first deploy
+        value: https://commit-risk-api.onrender.com
