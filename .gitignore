@@ -88,6 +88,9 @@ models/*.pb
 *.pb
 *.model
 
+# ── Exception: commit the production model so Render can load it ──────────────
+!models/advanced_xgboost.pkl
+
 # -----------------------------------------------------------------------------
 # DATA FILES (Too large for Git - use cloud storage or DVC)
 # -----------------------------------------------------------------------------
