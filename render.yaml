@@ -1,20 +1,4 @@
 services:
-  # ── Inference API (FastAPI) ────────────────────────────────────────────────
-  - type: web
-    name: commit-risk-api
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    # Render free tier: 512 MB RAM, shared CPU
-    plan: free
-    healthCheckPath: /health
-    envVars:
-      - key: MODEL_PATH
-        value: models/advanced_xgboost.pkl
-      # Add GITHUB_TOKEN here if your ingestion pipeline needs it
-      # - key: GITHUB_TOKEN
-      #   sync: false   # ← set manually in Render dashboard
-
-  # ── Monitoring Dashboard (Streamlit) ──────────────────────────────────────
   - type: web
     name: commit-risk-dashboard
     runtime: python
@@ -24,6 +8,3 @@ services:
     envVars:
       - key: MODEL_PATH
         value: models/advanced_xgboost.pkl
-      # Point the dashboard at the deployed API
-      - key: API_URL
-        value: https://commit-risk-api.onrender.com
