@@ -1,0 +1,28 @@
+services:
+  api:
+    image: sahojit/ml-commit-risk-api:latest
+    container_name: ml-commit-risk-api
+    ports:
+      - "8001:8000"
+    environment:
+      - PORT=8000
+      - MODEL_PATH=models/advanced_xgboost.pkl
+    volumes:
+      - logs_data:/app/logs
+    restart: unless-stopped
+
+  dashboard:
+    image: sahojit/ml-commit-risk-dashboard:latest
+    container_name: ml-commit-risk-dashboard
+    ports:
+      - "8502:8501"
+    environment:
+      - PORT=8501
+    volumes:
+      - logs_data:/app/logs
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  logs_data:

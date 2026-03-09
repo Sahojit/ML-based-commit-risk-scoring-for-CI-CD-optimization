@@ -1,0 +1,25 @@
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements-dashboard.txt .
+RUN pip install --no-cache-dir -r requirements-dashboard.txt
+
+COPY src/ ./src/
+COPY models/ ./models/
+COPY dashboard_v2.py .
+
+RUN mkdir -p logs
+
+ENV PORT=8501
+
+EXPOSE 8501
+
+CMD streamlit run dashboard_v2.py \
+        --server.port $PORT \
+        --server.address 0.0.0.0 \
+        --server.headless true
