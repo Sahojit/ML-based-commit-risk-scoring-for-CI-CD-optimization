@@ -1,7 +1,0 @@
-artifact_location: file:///Users/sahojitkarmakar/Documents/project/ML pipeline/ML
-  Commit Risk/models/registry/141186488592546734
-creation_time: 1772462654332
-experiment_id: '141186488592546734'
-last_update_time: 1772462654332
-lifecycle_stage: active
-name: commit_risk_scoring
