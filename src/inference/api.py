@@ -1,7 +1,3 @@
-"""
-FastAPI Inference API
-ML Commit Risk Scoring — Production endpoint
-"""
 
 import logging
 import os
@@ -18,9 +14,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
-
-
-# ── Pydantic schemas ──────────────────────────────────────────────────────────
 
 class CommitRequest(BaseModel):
     commit_hash: str = Field(..., description="Unique commit identifier")
@@ -55,7 +48,6 @@ class CommitRequest(BaseModel):
         }
     }
 
-
 class PredictionResponse(BaseModel):
     commit_hash: str
     risk_score: float
@@ -64,16 +56,13 @@ class PredictionResponse(BaseModel):
     recommendation: str
     prediction_time: str
 
-
 class BatchRequest(BaseModel):
     commits: List[CommitRequest]
-
 
 class BatchResponse(BaseModel):
     results: List[dict]
     total: int
     processed: int
-
 
 class HealthResponse(BaseModel):
     status: str
@@ -81,15 +70,10 @@ class HealthResponse(BaseModel):
     model_type: Optional[str] = None
     version: str = "1.0.0"
 
-
-# ── App state ─────────────────────────────────────────────────────────────────
-
 _state: dict = {"predictor": None}
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load the model once at startup, unload on shutdown."""
     import sys
     from pathlib import Path
 
@@ -105,15 +89,11 @@ async def lifespan(app: FastAPI):
         logger.info("Model loaded successfully.")
     except Exception as exc:
         logger.error(f"Failed to load model: {exc}")
-        # Keep running — health endpoint will report degraded status.
 
-    yield  # app serves requests here
+    yield
 
     _state["predictor"] = None
     logger.info("Shutdown complete.")
-
-
-# ── App ───────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
     title="ML Commit Risk Scoring API",
@@ -135,13 +115,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# ── Routes ────────────────────────────────────────────────────────────────────
-
 @app.get("/", response_model=HealthResponse, tags=["Health"])
 @app.get("/health", response_model=HealthResponse, tags=["Health"])
 def health():
-    """Health check — returns model status. Used by Render's health probe."""
     predictor = _state["predictor"]
     model_loaded = predictor is not None
     model_type: Optional[str] = None
@@ -158,10 +134,8 @@ def health():
         model_type=model_type,
     )
 
-
 @app.post("/predict", response_model=PredictionResponse, tags=["Prediction"])
 def predict(request: CommitRequest):
-    """Predict bug risk for a single commit."""
     predictor = _state["predictor"]
     if predictor is None:
         raise HTTPException(status_code=503, detail="Model not loaded.")
@@ -176,7 +150,6 @@ def predict(request: CommitRequest):
 
     elapsed_ms = (time.perf_counter() - t0) * 1000
 
-    # Best-effort metrics logging — never fails the request.
     try:
         from src.monitoring.metrics_collector import MetricsCollector
 
@@ -192,10 +165,8 @@ def predict(request: CommitRequest):
 
     return PredictionResponse(**result)
 
-
 @app.post("/predict/batch", response_model=BatchResponse, tags=["Prediction"])
 def predict_batch(request: BatchRequest):
-    """Predict bug risk for up to 100 commits in one call."""
     predictor = _state["predictor"]
     if predictor is None:
         raise HTTPException(status_code=503, detail="Model not loaded.")
@@ -212,10 +183,8 @@ def predict_batch(request: BatchRequest):
     processed = sum(1 for r in results if "error" not in r)
     return BatchResponse(results=results, total=len(results), processed=processed)
 
-
 @app.get("/model/info", tags=["Model"])
 def model_info():
-    """Return metadata about the loaded model."""
     predictor = _state["predictor"]
     if predictor is None:
         raise HTTPException(status_code=503, detail="Model not loaded.")

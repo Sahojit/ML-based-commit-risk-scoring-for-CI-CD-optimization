@@ -1,12 +1,7 @@
-"""
-Run Label Generation Pipeline
-Generates binary labels for commits based on bug-fix keywords
-"""
 
 import sys
 from pathlib import Path
 
-# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import logging
@@ -14,7 +9,6 @@ import pandas as pd
 from src.training.label_generator import LabelGenerator
 from src.utils.config_loader import ConfigLoader
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -25,21 +19,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 def main():
-    """
-    Main labeling pipeline
-    """
     logger.info("=" * 70)
     logger.info("STARTING LABEL GENERATION PIPELINE")
     logger.info("=" * 70)
     
     try:
-        # Load configuration
         config_loader = ConfigLoader()
         config = config_loader.load_main_config()
         
-        # Get settings
         ingestion_config = config['data_ingestion']
         label_config = config['label_generation']
         
@@ -51,27 +39,21 @@ def main():
         logger.info(f"Output: {output_path}")
         logger.info(f"Bug keywords: {', '.join(bug_keywords)}")
         
-        # Load commits
         logger.info("Loading commits data...")
         commits_df = pd.read_csv(input_path)
         logger.info(f"Loaded {len(commits_df)} commits")
         
-        # Initialize label generator
         generator = LabelGenerator(bug_keywords=bug_keywords)
         
-        # Generate labels
         logger.info("Generating labels...")
         labels_df = generator.generate_labels(commits_df)
         
-        # Validate labels
         logger.info("Validating labels...")
         validation = generator.validate_labels(labels_df)
         
-        # Save labels
         logger.info("Saving labels...")
         generator.save_labels(labels_df, output_path)
         
-        # Display statistics
         logger.info("=" * 70)
         logger.info("LABELING STATISTICS")
         logger.info("=" * 70)
@@ -80,14 +62,12 @@ def main():
         logger.info(f"Clean commits: {validation['clean_commits']}")
         logger.info(f"Average confidence: {validation['avg_confidence']:.2f}")
         
-        # Keyword usage statistics
         keyword_stats = generator.get_bug_keywords_used(commits_df)
         logger.info("\nKeyword usage:")
         for _, row in keyword_stats.head(5).iterrows():
             if row['count'] > 0:
                 logger.info(f"  '{row['keyword']}': {row['count']} occurrences")
         
-        # Merge with commits for review
         review_df = commits_df.merge(labels_df, on='commit_hash', how='left')
         buggy_commits = review_df[review_df['is_buggy'] == 1][
             ['commit_hash', 'author_name', 'message', 'is_buggy']
@@ -109,7 +89,6 @@ def main():
     except Exception as e:
         logger.error(f"❌ Pipeline failed: {e}")
         raise
-
 
 if __name__ == "__main__":
     main()

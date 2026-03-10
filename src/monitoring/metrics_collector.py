@@ -1,7 +1,3 @@
-"""
-Metrics Collector
-Collects and stores prediction metrics for monitoring
-"""
 
 import sys
 from pathlib import Path
@@ -13,26 +9,15 @@ from datetime import datetime
 from typing import Dict, Any
 import pandas as pd
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-
 class MetricsCollector:
-    """
-    Collects and stores prediction metrics
-    """
     
     def __init__(self, log_file: str = "logs/predictions.log"):
-        """
-        Initialize MetricsCollector
-        
-        Args:
-            log_file: Path to predictions log file
-        """
         self.log_file = log_file
         Path(log_file).parent.mkdir(parents=True, exist_ok=True)
         
@@ -46,16 +31,6 @@ class MetricsCollector:
         features: Dict[str, Any],
         response_time_ms: float
     ):
-        """
-        Log a single prediction
-        
-        Args:
-            commit_hash: Commit identifier
-            risk_score: Predicted risk score
-            risk_level: Risk level (LOW/MEDIUM/HIGH)
-            features: Input features used
-            response_time_ms: API response time
-        """
         log_entry = {
             "timestamp": datetime.now().isoformat(),
             "commit_hash": commit_hash,
@@ -65,20 +40,10 @@ class MetricsCollector:
             "response_time_ms": response_time_ms
         }
         
-        # Append to log file
         with open(self.log_file, 'a') as f:
             f.write(json.dumps(log_entry) + '\n')
     
     def load_predictions(self, limit: int = None) -> pd.DataFrame:
-        """
-        Load prediction logs as DataFrame
-        
-        Args:
-            limit: Maximum number of recent predictions to load
-        
-        Returns:
-            DataFrame with predictions
-        """
         try:
             predictions = []
             
@@ -90,7 +55,6 @@ class MetricsCollector:
             if not predictions:
                 return pd.DataFrame()
             
-            # Apply limit
             if limit:
                 predictions = predictions[-limit:]
             
@@ -107,15 +71,6 @@ class MetricsCollector:
             return pd.DataFrame()
     
     def get_summary_stats(self, df: pd.DataFrame) -> Dict[str, Any]:
-        """
-        Calculate summary statistics
-        
-        Args:
-            df: DataFrame with predictions
-        
-        Returns:
-            Dictionary with statistics
-        """
         if df.empty:
             return {
                 "total_predictions": 0,
@@ -137,20 +92,13 @@ class MetricsCollector:
         
         return stats
 
-
-# ==============================================================================
-# EXAMPLE USAGE
-# ==============================================================================
-
 if __name__ == "__main__":
     logger.info("=" * 70)
     logger.info("TESTING METRICS COLLECTOR")
     logger.info("=" * 70)
     
-    # Initialize collector
     collector = MetricsCollector()
     
-    # Log some sample predictions
     print("\nLogging sample predictions...")
     
     sample_predictions = [
@@ -182,14 +130,12 @@ if __name__ == "__main__":
     
     print(f"✅ Logged {len(sample_predictions)} predictions")
     
-    # Load and display
     print("\nLoading predictions...")
     df = collector.load_predictions()
     
     print(f"\nLoaded {len(df)} predictions:")
     print(df[['timestamp', 'commit_hash', 'risk_score', 'risk_level']].head())
     
-    # Get statistics
     print("\nSummary Statistics:")
     stats = collector.get_summary_stats(df)
     for key, value in stats.items():

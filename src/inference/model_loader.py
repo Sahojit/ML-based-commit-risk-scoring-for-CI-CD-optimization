@@ -1,7 +1,3 @@
-"""
-Model Loader
-Loads trained ML model and handles predictions
-"""
 
 import sys
 from pathlib import Path
@@ -12,26 +8,15 @@ import joblib
 from typing import Optional
 import pandas as pd
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-
 class ModelLoader:
-    """
-    Loads and caches trained ML models
-    """
     
     def __init__(self, model_path: str = "models/advanced_xgboost.pkl"):
-        """
-        Initialize ModelLoader
-        
-        Args:
-            model_path: Path to trained model file
-        """
         self.model_path = model_path
         self.model = None
         self.feature_names = None
@@ -39,20 +24,12 @@ class ModelLoader:
         logger.info(f"ModelLoader initialized with path: {model_path}")
     
     def load_model(self):
-        """
-        Load model from disk
-        
-        Returns:
-            Loaded model
-        """
         try:
             self.model = joblib.load(self.model_path)
             
-            # Extract feature names
             if hasattr(self.model, 'feature_names_in_'):
                 self.feature_names = list(self.model.feature_names_in_)
             else:
-                # Fallback: use standard feature names
                 self.feature_names = self._get_default_feature_names()
             
             logger.info(f"Model loaded successfully from {self.model_path}")
@@ -69,12 +46,6 @@ class ModelLoader:
             raise
     
     def _get_default_feature_names(self) -> list:
-        """
-        Get default feature names (in case model doesn't store them)
-        
-        Returns:
-            List of feature names
-        """
         return [
             'lines_added', 'lines_deleted', 'files_changed', 'total_churn',
             'churn_ratio', 'touches_core', 'touches_tests', 'complexity_score',
@@ -84,49 +55,26 @@ class ModelLoader:
         ]
     
     def predict_proba(self, features: pd.DataFrame) -> float:
-        """
-        Predict probability of bug
-        
-        Args:
-            features: DataFrame with commit features
-        
-        Returns:
-            Probability of bug (0.0 to 1.0)
-        """
         if self.model is None:
             raise RuntimeError("Model not loaded. Call load_model() first.")
         
-        # Ensure features are in correct order
         if self.feature_names:
-            # Reorder columns to match training
             missing_features = set(self.feature_names) - set(features.columns)
             if missing_features:
                 logger.warning(f"Missing features: {missing_features}")
-                # Add missing features with default value 0
                 for feature in missing_features:
                     features[feature] = 0
             
             features = features[self.feature_names]
         
-        # Predict
-        proba = self.model.predict_proba(features)[:, 1]  # Probability of class 1 (buggy)
+        proba = self.model.predict_proba(features)[:, 1]
         
         return proba[0]
     
     def predict(self, features: pd.DataFrame) -> int:
-        """
-        Predict binary label
-        
-        Args:
-            features: DataFrame with commit features
-        
-        Returns:
-            Binary prediction (0 or 1)
-        """
         if self.model is None:
             raise RuntimeError("Model not loaded. Call load_model() first.")
         
-        # Ensure features are in correct order
         if self.feature_names:
             features = features[self.feature_names]
         
@@ -135,12 +83,6 @@ class ModelLoader:
         return int(prediction[0])
     
     def get_model_info(self) -> dict:
-        """
-        Get information about the loaded model
-        
-        Returns:
-            Dictionary with model metadata
-        """
         if self.model is None:
             return {"status": "not_loaded"}
         
@@ -152,30 +94,22 @@ class ModelLoader:
             "feature_names": self.feature_names
         }
 
-
-# ==============================================================================
-# EXAMPLE USAGE
-# ==============================================================================
-
 if __name__ == "__main__":
     logger.info("=" * 70)
     logger.info("TESTING MODEL LOADER")
     logger.info("=" * 70)
     
-    # Initialize and load model
     loader = ModelLoader()
     
     try:
         loader.load_model()
         
-        # Get model info
         info = loader.get_model_info()
         print("\nModel Info:")
         print(f"  Status: {info['status']}")
         print(f"  Type: {info['model_type']}")
         print(f"  Features: {info['num_features']}")
         
-        # Create sample features
         sample_features = pd.DataFrame({
             'lines_added': [120],
             'lines_deleted': [45],
@@ -198,7 +132,6 @@ if __name__ == "__main__":
             'month': [3]
         })
         
-        # Make predictions
         proba = loader.predict_proba(sample_features)
         prediction = loader.predict(sample_features)
         

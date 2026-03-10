@@ -1,0 +1,11 @@
+artifact_location: file:///Users/sahojitkarmakar/Documents/project/ML pipeline/ML
+  Commit Risk/models/registry/141186488592546734/models/m-a4c2728a69174ce1a4e7bd8ed602b646/artifacts
+creation_timestamp: 1772478604240
+experiment_id: '141186488592546734'
+last_updated_timestamp: 1772478605921
+model_id: m-a4c2728a69174ce1a4e7bd8ed602b646
+model_type: null
+name: model
+source_run_id: 3269897d679242dfb21fc49d331e0d88
+status: 2
+status_message: null

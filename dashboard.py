@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 
-# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent))
 
 st.set_page_config(
@@ -18,7 +17,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Styling ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
     .risk-high { color: #ff4b4b; font-weight: bold; }
@@ -33,11 +31,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
-# ── Helper: load prediction logs ─────────────────────────────────────────────
 @st.cache_data(ttl=30)
 def load_predictions(log_path: str) -> pd.DataFrame:
-    """Load JSONL prediction logs into a DataFrame."""
     path = Path(log_path)
     if not path.exists():
         return pd.DataFrame()
@@ -58,30 +53,23 @@ def load_predictions(log_path: str) -> pd.DataFrame:
     df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
     df = df.dropna(subset=["timestamp"])
 
-    # Flatten nested features dict into columns for drill-down
     if "features" in df.columns:
         features_df = pd.json_normalize(df["features"])
         features_df.index = df.index
-        # Drop columns that already exist in df to avoid duplicates
         overlap = features_df.columns.intersection(df.columns)
         features_df = features_df.drop(columns=overlap)
         df = pd.concat([df.drop(columns=["features"]), features_df], axis=1)
 
     return df
 
-
-# ── Helper: load predictor (cached) ─────────────────────────────────────────
 @st.cache_resource
 def get_predictor():
-    """Load the ML model once and cache it."""
     try:
         from src.inference.predictor import CommitPredictor
         return CommitPredictor()
     except Exception as e:
         return None
 
-
-# ── Sidebar ──────────────────────────────────────────────────────────────────
 st.sidebar.title("🔍 ML Commit Risk")
 page = st.sidebar.radio(
     "Navigate",
@@ -91,14 +79,12 @@ page = st.sidebar.radio(
 
 st.sidebar.markdown("---")
 
-# Filters (apply to Dashboard page)
 st.sidebar.subheader("Filters")
 
 log_file = "logs/predictions.log"
 df_all = load_predictions(log_file)
 
 if not df_all.empty:
-    # Date range filter
     min_date = pd.Timestamp(df_all["timestamp"].min()).date()
     max_date = pd.Timestamp(df_all["timestamp"].max()).date()
     date_range = st.sidebar.date_input(
@@ -108,16 +94,13 @@ if not df_all.empty:
         max_value=max_date,
     )
 
-    # Risk level filter
     risk_options = ["ALL"] + sorted(df_all["risk_level"].unique().tolist())
     selected_risk = st.sidebar.multiselect(
         "Risk level", options=risk_options, default=["ALL"]
     )
 
-    # Commit hash search
     search_hash = st.sidebar.text_input("Search commit hash", "")
 
-    # Apply filters
     df = df_all.copy()
     if len(date_range) == 2:
         start, end = date_range
@@ -132,7 +115,6 @@ if not df_all.empty:
 else:
     df = df_all
 
-# Auto-refresh toggle
 st.sidebar.markdown("---")
 auto_refresh = st.sidebar.toggle("Auto-refresh (30s)", value=False)
 if auto_refresh:
@@ -149,9 +131,6 @@ if st.sidebar.button("Refresh now"):
     st.cache_data.clear()
     st.rerun()
 
-# ═════════════════════════════════════════════════════════════════════════════
-# PAGE: Dashboard
-# ═════════════════════════════════════════════════════════════════════════════
 if page == "Dashboard":
     st.title("ML Commit Risk Monitoring")
 
@@ -162,7 +141,6 @@ if page == "Dashboard":
 
     st.caption(f"Showing {len(df)} of {len(df_all)} predictions")
 
-    # ── Key Metrics ──────────────────────────────────────────────────────
     c1, c2, c3, c4, c5 = st.columns(5)
 
     with c1:
@@ -182,7 +160,6 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-    # ── Row 1: Risk distribution + Risk over time ────────────────────────
     col1, col2 = st.columns(2)
 
     with col1:
@@ -215,7 +192,6 @@ if page == "Dashboard":
         fig_line.update_layout(yaxis_range=[0, 1])
         st.plotly_chart(fig_line, use_container_width=True)
 
-    # ── Row 2: Histogram + Response time ─────────────────────────────────
     col3, col4 = st.columns(2)
 
     with col3:
@@ -251,7 +227,6 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-    # ── Feature Correlation Heatmap ──────────────────────────────────────
     numeric_cols = [c for c in ["lines_added", "lines_deleted", "files_changed",
                                 "total_churn", "bug_rate", "risk_score"] if c in df.columns]
     if len(numeric_cols) >= 3:
@@ -265,7 +240,6 @@ if page == "Dashboard":
             )
             st.plotly_chart(fig_corr, use_container_width=True)
 
-    # ── Interactive Data Table ────────────────────────────────────────────
     st.subheader("Prediction Details")
 
     display_cols = [c for c in ["timestamp", "commit_hash", "risk_score", "risk_level",
@@ -279,7 +253,6 @@ if page == "Dashboard":
         sort_col, ascending=(sort_order == "Ascending")
     )
 
-    # Color-code risk level
     def highlight_risk(row):
         colors = {"HIGH": "background-color: #ff4b4b33",
                   "MEDIUM": "background-color: #ffa50033",
@@ -296,7 +269,6 @@ if page == "Dashboard":
         height=400,
     )
 
-    # ── Download filtered data ───────────────────────────────────────────
     csv = df_display.to_csv(index=False)
     st.download_button(
         "Download filtered data as CSV",
@@ -305,10 +277,6 @@ if page == "Dashboard":
         mime="text/csv",
     )
 
-
-# ═════════════════════════════════════════════════════════════════════════════
-# PAGE: Live Prediction
-# ═════════════════════════════════════════════════════════════════════════════
 elif page == "Live Prediction":
     st.title("Live Commit Risk Prediction")
     st.caption("Enter commit details below and get an instant risk assessment.")
@@ -359,7 +327,6 @@ elif page == "Live Prediction":
         with st.spinner("Running prediction..."):
             result = predictor.predict_commit(commit_data)
 
-        # ── Display result ───────────────────────────────────────────────
         risk_color = {"HIGH": "red", "MEDIUM": "orange", "LOW": "green"}[result["risk_level"]]
 
         st.markdown("---")
@@ -375,7 +342,6 @@ elif page == "Live Prediction":
 
         st.info(f"**Recommendation:** {result['recommendation']}")
 
-        # Risk gauge chart
         fig_gauge = go.Figure(go.Indicator(
             mode="gauge+number",
             value=result["risk_score"] * 100,
@@ -398,7 +364,6 @@ elif page == "Live Prediction":
         fig_gauge.update_layout(height=300)
         st.plotly_chart(fig_gauge, use_container_width=True)
 
-        # Log the prediction
         try:
             from src.monitoring.metrics_collector import MetricsCollector
             collector = MetricsCollector()
@@ -413,7 +378,6 @@ elif page == "Live Prediction":
         except Exception:
             pass
 
-    # ── Quick presets ─────────────────────────────────────────────────────
     st.markdown("---")
     st.subheader("Quick Presets")
     st.caption("Click a preset to auto-fill the form with example data, then submit.")
@@ -443,10 +407,6 @@ elif page == "Live Prediction":
                 st.session_state["preset"] = values
                 st.info(f"Preset **{name}** values: {values}")
 
-
-# ═════════════════════════════════════════════════════════════════════════════
-# PAGE: Model Info
-# ═════════════════════════════════════════════════════════════════════════════
 elif page == "Model Info":
     st.title("Model Information")
 
@@ -468,7 +428,6 @@ elif page == "Model Info":
             for i, feat in enumerate(info["feature_names"], 1):
                 st.text(f"{i:2d}. {feat}")
 
-    # Feature importance (if available)
     st.markdown("---")
     st.subheader("Feature Importance")
 
@@ -492,7 +451,6 @@ elif page == "Model Info":
     except Exception as e:
         st.warning(f"Could not extract feature importance: {e}")
 
-    # Training summary
     summary_path = Path("models/training_summary.txt")
     if summary_path.exists():
         with st.expander("Training Summary", expanded=False):

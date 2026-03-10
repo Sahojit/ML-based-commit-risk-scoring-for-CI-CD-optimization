@@ -1,29 +1,19 @@
-"""
-Run FastAPI Inference Server
-Starts the commit risk prediction API
-"""
 
 import sys
 from pathlib import Path
 
-# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import uvicorn
 import logging
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-
 def main():
-    """
-    Start the FastAPI server
-    """
     logger.info("=" * 70)
     logger.info("STARTING ML COMMIT RISK API SERVER")
     logger.info("=" * 70)
@@ -43,7 +33,6 @@ def main():
         reload=False,
         log_level="info"
     )
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/sahojitkarmakar/Documents/project/ML pipeline/ML Commit
+  Risk/models/registry/141186488592546734/1d4efeebb7f947a7beddde21f52a3b35/artifacts
+end_time: 1772478335964
+entry_point_name: ''
+experiment_id: '141186488592546734'
+lifecycle_stage: active
+run_id: 1d4efeebb7f947a7beddde21f52a3b35
+run_name: logistic_regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772478335958
+status: 4
+tags: []
+user_id: sahojitkarmakar

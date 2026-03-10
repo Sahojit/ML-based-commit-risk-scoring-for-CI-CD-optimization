@@ -1,0 +1,265 @@
+commit_hash,author,author_name,timestamp,message,files_changed,lines_added,lines_deleted,total_changes,extracted_at
+b4d6892c9ee6523ea6b15257feb045271ad8b761,jbrockmendel@gmail.com,jbrockmendel,2026-03-02 17:29:03+00:00,PERF: use pc.utf8_normalize (#64359),1,1,4,5,2026-03-03 00:39:57.594918
+356ecca35d54c50189f8ee4f18dcc22abbd8bcd4,66853113+pre-commit-ci[bot]@users.noreply.github.com,pre-commit-ci[bot],2026-03-02 17:28:32+00:00,"[pre-commit.ci] pre-commit autoupdate (#64367)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",16,47,41,88,2026-03-03 00:39:57.594918
+0b9d62e28919a820a3521e29d1b221e621738a78,tuhinsharma121@gmail.com,Tuhin Sharma,2026-03-02 17:24:32+00:00,DOC: Fix ES01 for pandas.DataFrame (#64362),2,32,8,40,2026-03-03 00:39:57.594918
+7629c655b22b998dd86bf98c2f1c721998e9e4f1,jbrockmendel@gmail.com,jbrockmendel,2026-03-02 14:29:34+00:00,PERF: floatify (#64356),1,6,8,14,2026-03-03 00:39:57.594918
+dc84f46f4633b213c5b002eaa5cd89375541e1d4,sharmasanchitrishi@gmail.com,Sanchit Rishi,2026-03-01 20:56:42+00:00,"TST: Add tests for BOM handling (#63914)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",2,25,5,30,2026-03-03 00:39:57.594918
+63c3d7f4f53007d302ee82d805486a5f9685fd55,100374096+albystack@users.noreply.github.com,alberto,2026-03-01 17:54:09+00:00,DOC: Fix typo in tz_localize level parameter description (#64355),1,1,1,2,2026-03-03 00:39:57.594918
+1a753531c565e11d4d78912d09b9343945da9363,tuhinsharma121@gmail.com,Tuhin Sharma,2026-03-01 17:35:56+00:00,DOC: Fix ES01 for pandas.api.typing.Rolling (#64352),2,59,19,78,2026-03-03 00:39:57.594918
+3d8da5cd772eb0c6517772847976c4e3c3c67f6d,tuhinsharma121@gmail.com,Tuhin Sharma,2026-03-01 17:34:38+00:00,DOC: Fix ES01 for pandas.Interval (#64351),2,18,5,23,2026-03-03 00:39:57.594918
+8e30c386b95040ee72b95836f2cad0ab9cbc3ea0,jbrockmendel@gmail.com,jbrockmendel,2026-03-01 17:33:17+00:00,TYP: pytables (#64348),1,19,26,45,2026-03-03 00:39:57.594918
+f462a2e240a99b5bc82d155e056c7508817fb6e7,218712309+bittoby@users.noreply.github.com,BitToby,2026-02-28 19:40:27+00:00,depr: offset name (#64212),10,40,9,49,2026-03-03 00:39:57.594918
+2f32a3104cbe3478c562dc290c8a8e6862a59a1f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-28 17:01:49+00:00,DOC: Fix ES01 for pandas.Index (#64340),2,29,9,38,2026-03-03 00:39:57.594918
+aad70e29a477f53a9e285d23059d04ed2a450113,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-27 16:47:24+00:00,DOC: Fix ES01 for pandas.Timedelta (#64324),2,18,5,23,2026-03-03 00:39:57.594918
+12e42d91d43026ab6f41ea066393118ff5e1d199,kjmin622@naver.com,Jeongmin Gil,2026-02-27 14:40:08+00:00,BUG: HDFStore.select(where=...) silently returns empty DataFrame with datetime64[us] index (#64318),3,20,1,21,2026-03-03 00:39:57.594918
+8352ab938ec33c914abab167d8239cac8e44e4dd,jbrockmendel@gmail.com,jbrockmendel,2026-02-27 00:21:31+00:00,"PERF: use kth_smallest_c (O(n) quickselect) in group_quantile (#64330)
+
+Co-authored-by: Claude Sonnet 4.6 <noreply@anthropic.com>",2,86,64,150,2026-03-03 00:39:57.594918
+6f956d30a17ecaa78a550da8b578d09e3d9f8fb0,jbrockmendel@gmail.com,jbrockmendel,2026-02-26 23:34:13+00:00,TYP: EllipsisType (#64329),3,5,14,19,2026-03-03 00:39:57.594918
+43ce12cf50ebd9d25424e42e4976799174e5794a,jbrockmendel@gmail.com,jbrockmendel,2026-02-26 23:13:11+00:00,TST: fix xfailed plotting tests (#64328),3,1,16,17,2026-03-03 00:39:57.594918
+adc3b3740dfb7ddbbf1de1c0d6680dd77782c7c9,jbrockmendel@gmail.com,jbrockmendel,2026-02-26 16:29:13+00:00,TST: remove strict=False xfail from plotting test (#64316),1,0,5,5,2026-03-03 00:39:57.594918
+32cd5c90e780f4ec2cf80136d95e6ef52a6b0d24,jbrockmendel@gmail.com,jbrockmendel,2026-02-26 16:28:20+00:00,REF: avoid Period[B] in plotting (#64311),5,183,90,273,2026-03-03 00:39:57.594918
+ea4d2c0b27134bd98f881a5ae755a7c34c61832a,yushiyang.k@gmail.com,Shiyang,2026-02-26 02:15:50+00:00,CI: `validate_docstrings.py` breaks in WSL (#64299),1,1,1,2,2026-03-03 00:39:57.594918
+6ec078590a6d5c15c3317cfcb8dce69c5cfb5a4e,kjmin622@naver.com,Jeongmin Gil,2026-02-25 21:48:04+00:00,PERF: DataFrame.describe() calls Series.reindex() N times instead of once (#64304),1,1,6,7,2026-03-03 00:39:57.594918
+d5b562f4162f072b9e353c086913c388c1290ee7,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-25 18:22:48+00:00,DOC: Fix ES01 for pandas.Timestamp (#64309),3,30,4,34,2026-03-03 00:39:57.594918
+c8e8651a1b9d45eb45a3f6cf7fad4c0152cc84bb,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-24 21:39:44+00:00,DOC: Fix ES01 for pandas.Series (#64295),4,29,9,38,2026-03-03 00:39:57.594918
+13fb24a983e8bda8188e34e330a5a09b4783d85f,rtyler@brokenco.de,R. Tyler Croy,2026-02-24 21:24:52+00:00,"Fix a minor doc typo in DataFrame.convert_dtypes (#64301)
+
+Signed-off-by: R. Tyler Croy <rtyler@brokenco.de>",1,1,1,2,2026-03-03 00:39:57.594918
+ba61f5562f47b6466eb05b6aae0aa817ed92f558,jbrockmendel@gmail.com,jbrockmendel,2026-02-24 16:42:03+00:00,DEPR: casting non-standard listlikes to array in arithmetic operations (#62560),18,227,21,248,2026-03-03 00:39:57.594918
+184d793fc54f16cf0899cbe9d0d4b2eca16c2368,jbrockmendel@gmail.com,jbrockmendel,2026-02-23 17:50:20+00:00,PERF: PeriodArray._from_sequence (#64258),8,99,24,123,2026-03-03 00:39:57.594918
+29de0307705d9be5f76e66d96c126fdfa7d73a51,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-23 17:48:22+00:00,DOC: Fix ES01 for pandas.Timestamp (#64260),3,46,9,55,2026-03-03 00:39:57.594918
+55d33ffc08f405d440a3047bd2e623fe57decb4c,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-23 17:47:43+00:00,BUG: Support for Expressions with dunders (#64270),3,131,0,131,2026-03-03 00:39:57.594918
+228ae0b277a65cfd2c6c283ff1175cf6443d073c,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-23 17:38:50+00:00,DOC: Fix ES01 for pandas.DataFrame (#64268),2,30,9,39,2026-03-03 00:39:57.594918
+990a2ad7bdca09cd42a4998a60c8ece8677b4a15,sarkar.antareep.9035@gmail.com,Antareep Sarkar,2026-02-22 15:45:41+00:00,TST/DOC: add tests and edit docs for pandas.array (#64138),2,37,0,37,2026-03-03 00:39:57.594918
+8130978f1babeb6c87382ae1698f96706c71c532,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-21 18:13:27+00:00,DOC: Fix ES01 for pandas.Index (#64262),2,31,9,40,2026-03-03 00:39:57.594918
+8799906b974deff55a7e01e71c08d7b0b4c2a2f0,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-21 18:12:56+00:00,DOC: Fix ES01 for pandas.api.types (#64261),2,30,8,38,2026-03-03 00:39:57.594918
+955668eeb613729f6a83b8e3eeaf916d00c6e6d8,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-21 18:12:15+00:00,DOC: Fix ES01 for pandas.Series (#64259),5,33,9,42,2026-03-03 00:39:57.594918
+06caf7ba275452cad58dee4af76adf3390af791b,jbrockmendel@gmail.com,jbrockmendel,2026-02-21 00:38:37+00:00,REF: avoid Period[B] usage in plotting (#64244),2,61,27,88,2026-03-03 00:39:57.594918
+499130200459c27dfbb148494f8d7c5cec6984e0,jbrockmendel@gmail.com,jbrockmendel,2026-02-20 22:22:17+00:00,REF: period_array use dtype instead of freq (#64256),11,40,49,89,2026-03-03 00:39:57.594918
+2d52202a15715e82b36325c7c459e8d68ba688cb,jbrockmendel@gmail.com,jbrockmendel,2026-02-20 22:20:52+00:00,PERF: Period.__repr__ (#64257),1,1,2,3,2026-03-03 00:39:57.594918
+0e37a9f19bf7952a88e00671f071005550e4c1b8,jbrockmendel@gmail.com,jbrockmendel,2026-02-20 17:28:08+00:00,BUG: Consistent PeriodIndex/PeriodArray behavior with datetime64 data (#64245),2,17,4,21,2026-03-03 00:39:57.594918
+0583f25f0f5831004a88f0177e4a7b225349adc7,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-20 16:52:28+00:00,DOC: Fix ES01 for pandas methods (#64248),9,30,8,38,2026-03-03 00:39:57.594918
+a7477ea1a36766c3be684c7c95703ae000d0e520,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-20 16:51:44+00:00,DOC: Fix ES01 for pandas.Timestamp (#64247),2,25,9,34,2026-03-03 00:39:57.594918
+374ec4ab3e1761df5d7e848248dfe32ddf42a4b1,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-20 16:51:06+00:00,DOC: Fix ES01 for pandas.Series (#64246),5,33,10,43,2026-03-03 00:39:57.594918
+00aa077f48c4d97656a1ad4bb2508f21b00311b6,jbrockmendel@gmail.com,jbrockmendel,2026-02-20 16:50:23+00:00,BUG: setitem-with-expansion unwanted casting (#62523),15,280,63,343,2026-03-03 00:39:57.594918
+d2cde1425f0a428bacec3e1ac0840a76efddc05f,jbrockmendel@gmail.com,jbrockmendel,2026-02-19 23:04:58+00:00,BUG: inconsistent PeriodArray/PeriodIndex construction casting behavior (#64242),3,58,35,93,2026-03-03 00:39:57.594918
+c0097dcd3a8c9e1047f46b1c776b745a54a8b44d,jbrockmendel@gmail.com,jbrockmendel,2026-02-19 18:38:35+00:00,ENH: support integers in PeriodArray._from_sequence (#64231),4,34,34,68,2026-03-03 00:39:57.594918
+d92ff5a70fd652c463e6e00666f8d44b7a188230,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-19 18:33:07+00:00,CI: Use scientific-python/upload-nightly-action for nightly wheels (#64218),2,25,56,81,2026-03-03 00:39:57.594918
+6d47fb294964cc9d496caaff15090beeb302232c,daniel98518@gmail.com,Angel98518,2026-02-18 21:58:54+00:00,"BUG: Fix test_assignment_not_inplace incorrect assertion (#64213)
+
+Co-authored-by: GitTensor Miner <miner@gittensor.io>",1,2,2,4,2026-03-03 00:39:57.594918
+66cf2907300714f1a8b86795fb425f284b325933,jbrockmendel@gmail.com,jbrockmendel,2026-02-18 19:05:42+00:00,"TST/DOC: document BDay no-weekend-gap behavior in plotting (#64225)
+
+Co-authored-by: Claude Opus 4.6 <noreply@anthropic.com>",2,25,3,28,2026-03-03 00:39:57.594918
+eb55d58df10c715a692d6e9fbd0e29d8e0525b19,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-18 19:02:48+00:00,TST/CLN: remove unnecessary left-over usage of using_infer_string in pytables tests (#64181),6,41,58,99,2026-03-03 00:39:57.594918
+b266cc7437da267f38191faa99c25136bb1f65d9,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-18 18:57:33+00:00,DOC: Fix ES01 for pandas.Series (#64182),4,30,10,40,2026-03-03 00:39:57.594918
+c6dd4b569371afb813b72f00911b43aebeeea2ed,52655393+AdamOrmondroyd@users.noreply.github.com,Adam Ormondroyd,2026-02-18 18:56:22+00:00,correct Dataframe.kurt(osis) -> DataFrame.kurt(osis) (#64191),1,2,2,4,2026-03-03 00:39:57.594918
+19e86656f0792cca836bf5ec865efff452375b78,jbrockmendel@gmail.com,jbrockmendel,2026-02-18 18:55:47+00:00,"CLN: remove unused attributes from TimeSeries_DateLocator/Formatter (#64209)
+
+Co-authored-by: Claude Opus 4.6 <noreply@anthropic.com>",1,4,32,36,2026-03-03 00:39:57.594918
+d856cc52aa916120b098c6e172254f8d7fbb5bad,jbrockmendel@gmail.com,jbrockmendel,2026-02-18 18:54:50+00:00,CLN: assorted cleanups (#64210),14,30,36,66,2026-03-03 00:39:57.594918
+de9eb534a05984575e1d72707fca88291418c335,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-18 18:52:06+00:00,DOC: update maintainers release guide (#64217),1,11,13,24,2026-03-03 00:39:57.594918
+ad593aad9f3d33c83dc962da92fe04dbd22981fa,22385371+wjandrea@users.noreply.github.com,William Andrea,2026-02-18 18:51:06+00:00,Doc +link (#64226),1,1,1,2,2026-03-03 00:39:57.594918
+d498610cec25232627f10242603a96bb0ea17226,cuiweixie@gmail.com,cui,2026-02-18 15:54:03+00:00,chore: nanoseconds to microseconds (#64221),1,1,1,2,2026-03-03 00:39:57.594918
+2ccac72000ab9df00a6af9adefad6809beacb57c,jpeacock29@gmail.com,Jacob Peacock,2026-02-18 15:46:35+00:00,"WEB: update links to migration guides in release blog post (#64072)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",2,5,4,9,2026-03-03 00:39:57.594918
+1f864beaf752cc618ba7f5478fd5300414caf552,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-18 14:18:34+00:00,DOC: start 3.0.2 whatsnew notes (#64220),3,31,1,32,2026-03-03 00:39:57.594918
+214ef331e51ca300c441bee7bea80fe65fb2e53b,fw_yasu11@hotmail.com,Yasunori Morishima（盛島康徳）,2026-02-18 14:13:00+00:00,DOC: fix Index.to_frame name parameter description (#64105),1,1,1,2,2026-03-03 00:39:57.594918
+861102de48fbea21d16166cf1a390334d1cf6bda,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-18 08:19:44+00:00,CI: Fix regex in docbuild-and-upload.yml (#64211),1,2,2,4,2026-03-03 00:39:57.594918
+04a5f9741d754513bbfc26bc2f048ca36bed6725,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-17 20:58:55+00:00,RLS: 3.0.1 (#64200),1,4,2,6,2026-03-03 00:39:57.594918
+22bd64fdb3716b642fb468f32790c688c5949e59,brianwhitedev1996@gmail.com,BitToby,2026-02-17 20:35:03+00:00,"ENH: Add item() method to ExtensionArray class (#64134)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",6,83,0,83,2026-03-03 00:39:57.594918
+2050cdeb0146c4f718404bcf257738a810605ace,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-17 17:31:40+00:00,DOC: cleanup 3.0.1 whatsnew (#64199),1,6,7,13,2026-03-03 00:39:57.594918
+1150e8bf75f7a777a8ac1e34a417bd75bf720873,sharmasanchitrishi@gmail.com,Sanchit Rishi,2026-02-17 15:42:47+00:00,"BUG: Fix read_hdf failing on generic datetime64 dtype (#64008)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",3,5,6,11,2026-03-03 00:39:57.594918
+718019c9fc2c50b384c7f4e10db817cef2b260aa,puduck622@gmail.com,Jeongmin Gil,2026-02-17 14:37:10+00:00,"BUG: use fill_null fallback for bug in pyarrow 21 on Windows (fixes join, fillna, duplicated, etc with pyarrow-backed arrays) (#64081)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",5,68,6,74,2026-03-03 00:39:57.594918
+e543746ad45b696d3156bae9ba757613bc217304,sharmasanchitrishi@gmail.com,Sanchit Rishi,2026-02-17 13:03:52+00:00,REG: Allow RE2 syntax in str.contains and str.replace  (#64122),4,34,8,42,2026-03-03 00:39:57.594918
+432519652a40a03bf188e65223c7764ec240087a,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-17 12:20:58+00:00,TST: remove fixed xfail for PyArrow 23.0.1 (#64185),1,1,9,10,2026-03-03 00:39:57.594918
+e678b4a29efdc8e3f3d49fab11c5f603978f146d,61946045+DavideRagazzon@users.noreply.github.com,DavideRagazzon,2026-02-17 08:39:43+00:00,DOC: Fix redundant git fetch command (#64171),1,1,2,3,2026-03-03 00:39:57.594918
+8ff7fbd34462ed68c8fc9dcd5bb460aee670a3a2,star1327p@gmail.com,Christine P. Chai,2026-02-17 03:27:21+00:00,DOC: Correct two typos in pandas documentation (#64176),2,4,4,8,2026-03-03 00:39:57.594918
+375e44bd089508e2949f12e64c9360e1d3c538b6,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-17 00:45:11+00:00,STY: Fix ruff error in construction.py (#64177),1,1,1,2,2026-03-03 00:39:57.594918
+b6944363849f680edf182df97c12eee5bf0cfefd,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-16 22:57:32+00:00,ENH: Allow UDFs to return a NumPy array in groupby.agg (#64111),5,47,16,63,2026-03-03 00:39:57.594918
+14f1fce205809c9b10efa800438ea46e10c05744,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-16 22:51:13+00:00,TST: add legacy file generation and tests for HDF5 (#64168),10,166,11,177,2026-03-03 00:39:57.594918
+39ffc454f49d79d6cd7bef2181d7cd207ec9adeb,kjmin622@naver.com,Jeongmin Gil,2026-02-16 22:16:19+00:00,"BUG: Pandas converts nullable int to float, even when this loses data (#63925)",5,40,16,56,2026-03-03 00:39:57.594918
+caa6a62b7cf16a8515b14cf936afcefa8ab495a7,kjmin622@naver.com,Jeongmin Gil,2026-02-16 22:14:02+00:00,"BUG: Conversion from numpy masked arrays to pandas array does not preserve missing values (#63887)
+
+Co-authored-by: Richard Shadrach <45562402+rhshadrach@users.noreply.github.com>",3,63,1,64,2026-03-03 00:39:57.594918
+04ab18a5957930231cba22fe5d9831b2871e45c8,bilichboris1999@gmail.com,Boris Bilich,2026-02-16 22:11:55+00:00,BUG: Fix JsonReader to handle nrows more robustly (#64025),3,63,9,72,2026-03-03 00:39:57.594918
+87d293ef00f08abf5a9216cbd28b6e52069c73d5,thierry.moisan@gmail.com,Thierry Moisan,2026-02-16 19:46:32+00:00,TYP: enable mypy for pandas.io.xml (#64167),2,21,10,31,2026-03-03 00:39:57.594918
+1385294afb5bef3f442e3aa1cb6991c08fbb1cbb,jbrockmendel@gmail.com,jbrockmendel,2026-02-16 19:27:58+00:00,REF: check dtype in validate_dtype_freq instead of freq (#64160),2,29,29,58,2026-03-03 00:39:57.594918
+12f1eefb6a4064c3a8693cc39562d71a583e0f5e,jbrockmendel@gmail.com,jbrockmendel,2026-02-16 19:22:04+00:00,REF: use dtype at lowest-level Period constructor (#64159),7,26,19,45,2026-03-03 00:39:57.594918
+7346003f862614f1b8b053c8d0c83b30299b8efc,jbrockmendel@gmail.com,jbrockmendel,2026-02-16 19:19:31+00:00,"PERF: PeriodIndex(integer_array, freq=freq) (#64158)
+
+Co-authored-by: Tuhin Sharma <tuhinsharma121@gmail.com>",3,11,10,21,2026-03-03 00:39:57.594918
+07c01b4af30557571b6bb1d729b8667c1af8743d,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-16 19:15:35+00:00,DOC: Fix ES01 for pandas.MultiIndex (#64162),2,38,11,49,2026-03-03 00:39:57.594918
+66910c9000c654e556075c4b14f4db8e012085be,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-16 19:14:26+00:00,"PERF: Avoid drop_duplicates(keep=False) in DataFrame.__getitem__ for single-column access (#64127)
+
+Co-authored-by: Matthew Roeschke <10647082+mroeschke@users.noreply.github.com>",3,40,10,50,2026-03-03 00:39:57.594918
+32b1bc4e0615233b0811665d765d4f216a80cf13,roeimed01@gmail.com,roeimed0,2026-02-16 09:54:10+00:00,BUG: DataFrame.loc fills b'' instead of NaN when adding new row and columns simultaneously (#64092),3,34,10,44,2026-03-03 00:39:57.594918
+65f88ea9e43670928bc18ffd1d0ed1f295adcf96,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-15 19:46:21+00:00,DOC: Fix ES01 for pandas.DatetimeIndex (#64156),5,30,14,44,2026-03-03 00:39:57.594918
+0c57b39059316178b04aca350083eb43f052ce73,jbrockmendel@gmail.com,jbrockmendel,2026-02-15 18:31:01+00:00,REF: avoid freq in require_matching_freq (#64137),5,34,21,55,2026-03-03 00:39:57.594918
+fc6fb6ab00d0e1fe8e6f43ba4e12b34031b78394,jbrockmendel@gmail.com,jbrockmendel,2026-02-15 18:26:46+00:00,REF: avoid freq in libperiod.extract_freq (#64136),3,10,9,19,2026-03-03 00:39:57.594918
+f5deac966b63ebc1b018a1b269ebd6f2808250a7,jbrockmendel@gmail.com,jbrockmendel,2026-02-15 17:40:31+00:00,REF: avoid freq in extract_ordinals (#64135),4,13,10,23,2026-03-03 00:39:57.594918
+3bdb9728f755bb734d3e45d31b037b63681ffe34,thierry.moisan@gmail.com,Thierry Moisan,2026-02-15 17:32:05+00:00,CLN: Enable ruff rule TC006 (runtime-cast-value) (#64149),75,469,456,925,2026-03-03 00:39:57.594918
+585ac0d08828c4b77fff8ef7a8f6313a39c94ffb,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-15 16:59:45+00:00,DOC: Fix ES01 for pandas.io.formats.style (#64151),3,50,9,59,2026-03-03 00:39:57.594918
+1fd91e13c56c64be5bd42aa31e9d2adad9935f58,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-15 16:57:59+00:00,DOC: Fix ES01 for pandas.Series (#64154),3,31,11,42,2026-03-03 00:39:57.594918
+fde14399126a9cbee4b3f2623040af677a6ff804,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-13 17:24:03+00:00,BUG: groupby.agg behavior changes in the present of args/kwargs (#64113),4,33,53,86,2026-03-03 00:39:57.594918
+a33735503d1d33e622bdfc8e91671a71b92875d4,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-13 17:13:58+00:00,DEPR: groupby.agg unpacking arrays of 1 element (#64112),7,46,11,57,2026-03-03 00:39:57.594918
+6cec78baaa433a5fae3138786526cb5f8ab0de9b,120306860+AnkitSharma-29@users.noreply.github.com,Ankit Sharma,2026-02-13 13:21:11+00:00,DOC: Fix typos in to_datetime docstring and comments (#64119),1,2,2,4,2026-03-03 00:39:57.594918
+4728afbb2bbbefa09f2f34d5f2571dbb998a097f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-12 20:06:49+00:00,DOC: Fix ES01 for pandas.DataFrame (#64125),3,34,11,45,2026-03-03 00:39:57.594918
+7dd44b7535b29688b2096c88a30f46084dcca1dc,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-12 16:59:08+00:00,"DEV:  Remove setup.py/setuptools support (#63981)
+
+Co-authored-by: Devpriya Dave <devpriyadave@gatech.edu>
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",21,75,1569,1644,2026-03-03 00:39:57.594918
+070799513bf3a1aceabacedccb0a095a2485be21,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-12 16:06:25+00:00,DOC: Fix ES01 for pandas.Series (#64124),3,21,10,31,2026-03-03 00:39:57.594918
+a2aa6d7a9ac8d4bdc9c74f6fe50737858f6ebc17,186915942+jeffreykenneth@users.noreply.github.com,jeffreykenneth,2026-02-11 17:12:18+00:00,"BUG: fixed to_timedelta with list of int and float (#64068)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",3,10,0,10,2026-03-03 00:39:57.594918
+d9188a4d3a537cc002db0df61756614e9d50c722,jpeacock29@gmail.com,Jacob Peacock,2026-02-11 13:18:51+00:00,DOC: Remove stale Categorical side-effects section (#64071),1,0,31,31,2026-03-03 00:39:57.594918
+2f0245cdc62ea046a87f3e810a634a8c84ad704e,brianwhitedev1996@gmail.com,BitToby,2026-02-11 10:26:39+00:00,"BUG: fix dataframe reindex with string fill_value (#63994)
+
+Co-authored-by: Joris Van den Bossche <jorisvandenbossche@gmail.com>",3,22,5,27,2026-03-03 00:39:57.594918
+3c56fd7227edd6639b90ebd6860c098563f4d261,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-11 08:17:49+00:00,DOC/BLD: use correct version number for linkcode in case of re-build of docs (#64106),1,1,1,2,2026-03-03 00:39:57.594918
+cc9e131258c3f6a2df793c3876ea708e192b4875,borahnabanitawork@gmail.com,Nabanita Borah,2026-02-10 22:52:46+00:00,DOC: Fix broken external links in debugging C extensions documentation (#64069) (#64073),1,3,3,6,2026-03-03 00:39:57.594918
+17e2d7d82cd6e3c3d14d0c26a0e2728d3a05f1ba,bilichboris1999@gmail.com,Boris Bilich,2026-02-10 22:01:52+00:00,BUG: Fix `read_excel` infinite loop on callable `skiprows` all True (#64027),4,23,2,25,2026-03-03 00:39:57.594918
+196417f53f120e560fdaf9b04b07760c8a9f46e9,kothe65@gmail.com,Álvaro Kothe,2026-02-10 17:48:52+00:00,BUG: prevent segfault with mismatching lengths in variable rolling window correlation and covariance (#64101),3,22,3,25,2026-03-03 00:39:57.594918
+4c6c62d76ecae184c639fa3b42e1fd593cc49486,irv@princeton.com,Irv Lustig,2026-02-10 17:47:07+00:00,add some missing aliases for typing (#64098),4,26,0,26,2026-03-03 00:39:57.594918
+012306ee5bb7c233eb4eac8165663885b693c39f,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-10 17:45:22+00:00,BUG: fix regression in DataFrame construction from list of dicts with missing value as key (#64104),4,80,5,85,2026-03-03 00:39:57.594918
+939cca6a9004681c160af0d15d7f83b29393fce7,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-09 23:34:35+00:00,"DOC: Cleanup leftover docstring templating, remove flake8 validation of docstrings (#64097)
+
+Co-authored-by: Richard Shadrach <45562402+rhshadrach@users.noreply.github.com>",27,129,4238,4367,2026-03-03 00:39:57.594918
+d19808b3ad857eaee70f5cbc1a97c6d764ef7e63,vishwasbajaj.global@gmail.com,Vishwas,2026-02-09 22:28:45+00:00,DOC: Fix spelling mistakes and incomplete sentences in Timestamp docstrings (#63955),6,6,6,12,2026-03-03 00:39:57.594918
+6b0213110d60b20280f45dd4882c391edffba97b,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-09 22:04:26+00:00,CI: Use pytest-cython 0.4.0rc1 with editable install for doctests (#63870),10,69,71,140,2026-03-03 00:39:57.594918
+f39609216d9e5b70c20874c0c9ce0e60447f059c,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-09 19:44:40+00:00,CI: Add dedicated Python 3.14 jobs (#64048),5,95,13,108,2026-03-03 00:39:57.594918
+b7f40772c8fb22d64dea7af4bf5546f52aa1e13b,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-09 17:08:07+00:00,BUG: don't mark pyarrow-string to numpy array as read-only unnecessarily (#64035),4,34,0,34,2026-03-03 00:39:57.594918
+702ef4c8b6dad0c75f8131e7fab6c57120f39048,74678373+agnuspaul98@users.noreply.github.com,Agnus Paul,2026-02-09 17:05:37+00:00,DOC: fix typo in text user guide (#64059),1,1,1,2,2026-03-03 00:39:57.594918
+f5ff6e99698d350bd96971bcd921c19c8907a3ac,star1327p@gmail.com,Christine P. Chai,2026-02-09 17:04:54+00:00,DOC: Improve wording in pandas documentation (#64080),7,8,8,16,2026-03-03 00:39:57.594918
+03282b1b68fff29946e3d49f4383b1895a0b5b58,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-09 10:43:13+00:00,DOC: Fix PANDAS_VERSION in docs build (#64013),1,27,4,31,2026-03-03 00:39:57.594918
+8cfd376b58a9f7346825238c33be070760586d5e,nathan.goldbaum@gmail.com,Nathan Goldbaum,2026-02-08 18:13:13+00:00,"BUG: Fix data races in block internals (#63783)
+
+Co-authored-by: Kumar Aditya <kumaraditya@python.org>",11,167,23,190,2026-03-03 00:39:57.594918
+b6d29424303e4791ddbef13c607203446b59dff5,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-08 18:05:20+00:00,DOC: Fix ES01 for pandas.tseries.offsets (#64062),2,30,7,37,2026-03-03 00:39:57.594918
+565e195681cdffbdad71d34c3fad6ce2430a6c82,cpitclaudel@users.noreply.github.com,Clément Pit-Claudel,2026-02-08 18:02:28+00:00,"DOC: Fix docstring of DataFrame.eq ('Equal', not 'Not equal') (#64076)",1,1,1,2,2026-03-03 00:39:57.594918
+78242b3f6a256e3638a655f54bb37464f13db585,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-06 20:16:39+00:00,CI: Use external_error_raised for pa.ArrowInvalid (#64057),1,3,3,6,2026-03-03 00:39:57.594918
+821ba1e3365d035b1d42da9ff5cbaed005450300,muhammadadhil45@gmail.com,Mohamed Adhil,2026-02-06 19:01:44+00:00,DOC: Inline docstrings in generic.py for ewm (GH#62437) (#64053),1,192,5,197,2026-03-03 00:39:57.594918
+a9396fe921030f7f3ce40a6b6addea1bd8ea8495,ramiabdelrazzaq@gmail.com,Rami Abdelrazzaq,2026-02-06 19:00:14+00:00,"CLN: Remove unused _shared_docs['aggregate'] template (#64052)
+
+Co-authored-by: RamiR <rami@molt.dev>",1,0,51,51,2026-03-03 00:39:57.594918
+6c04aed0b2b0b6ea9f6d0d8d40e0195463f39926,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-06 18:53:11+00:00,DOC: Fix ES01 for pandas.Timestamp (#64050),2,15,10,25,2026-03-03 00:39:57.594918
+67d036b7de9177bab516774eb08c79b88a1d15c0,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-06 18:52:34+00:00,DOC: Fix ES01 for pandas.tseries.offsets (#64049),2,24,18,42,2026-03-03 00:39:57.594918
+52de072c63bbb4b2cca2952af231ded00318cd6e,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 20:12:49+00:00,DOC: Fix ES01 for pandas.arrays (#64042),2,20,8,28,2026-03-03 00:39:57.594918
+942c60ad821bff20dfb5b9667a332b75d6dd17b3,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-02-05 19:35:45+00:00,BLD: Pin cryptography for win_arm64 wheel building (#64041),1,6,1,7,2026-03-03 00:39:57.594918
+56b61eaf12b63ff0804390323112b1d7b9567066,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-05 18:30:05+00:00,"BUG: groupby.agg with no groups, multiple keys, and group_keys=False (#63975)",5,51,32,83,2026-03-03 00:39:57.594918
+34c2dfaf137c90e907f79a3f8b575cb35c59a7fc,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 17:22:20+00:00,PERF: use self._startingMonth instead property (#64030),1,11,11,22,2026-03-03 00:39:57.594918
+f9985d12a589e44199f55788df77cd4fc94b738d,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 17:21:03+00:00,PERF: Use self._weekday and self._variation instead property (#64031),1,14,14,28,2026-03-03 00:39:57.594918
+a9aa29ebfc518608211467e6988c1e627e9323ac,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 16:58:47+00:00,DOC: Fix ES01 for pandas.DataFrame (#64034),4,44,20,64,2026-03-03 00:39:57.594918
+fc4c5e5b2f267c335bc0e19ae65974ae9cef4e47,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 16:56:59+00:00,DOC: Fix ES01 for pandas.api.typing.Resampler (#64033),3,43,18,61,2026-03-03 00:39:57.594918
+05824d74efead2088d3ed1e5422f672fdf38097d,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-05 16:54:54+00:00,DOC: Fix ES01 for pandas.Period (#64032),2,34,11,45,2026-03-03 00:39:57.594918
+ef8c35dcb05b8ee2ca357ce087c618f1c237647f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-04 20:50:40+00:00,PERF: use self._normalize instead property (#64017),1,22,22,44,2026-03-03 00:39:57.594918
+2da7ed61f01dc948c19ed6cf0358621418d3416a,126751582+ellatso@users.noreply.github.com,ellatso,2026-02-04 20:48:55+00:00,DOC: Inline @doc in pandas/core/arrays/_mixins.py (#64022),1,97,5,102,2026-03-03 00:39:57.594918
+48fbf93beca034acd092dd6213a938553b9fb40a,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-04 20:44:02+00:00,DOC: Fix ES01 for pandas.errors (#64020),2,24,8,32,2026-03-03 00:39:57.594918
+5fa2547547c2ef4fa95a59f8586a676450fd762e,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-04 20:30:03+00:00,DOC: Fix ES01 for pandas.Categorical (#64021),2,12,10,22,2026-03-03 00:39:57.594918
+2455fb9066628929be67011d01bb62a098cdb9ea,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-02-04 15:40:36+00:00,TST/CI: temporary xfail test_dataframe_from_series_or_index case for infer_string=False build (#64024),1,11,1,12,2026-03-03 00:39:57.594918
+1e2a0ae5573669d2922e3785759a2ef2b4bcae9e,50573808+kjmin622@users.noreply.github.com,Jeongmin Gil,2026-02-04 02:24:45+00:00,"BUG: Missing explicit libm dependency in meson.build causes undefined symbol errors #63640 (#64009)
+
+Co-authored-by: Álvaro Kothe <kothe65@gmail.com>",2,7,4,11,2026-03-03 00:39:57.594918
+8dd7f78d19c49b41c4cdbc6e5136488b3edb1874,33677443+evensong@users.noreply.github.com,evensong,2026-02-03 22:15:56+00:00,replaced all @doc in core/arrays/arrow/array.py with inline docstrings (#63942),1,178,6,184,2026-03-03 00:39:57.594918
+62bf264f85708edb2fa3c866fcd13822074fc149,Ameydarokarasd@gmail.com,Amey Darokar,2026-02-03 21:35:00+00:00,BUG: Fix clip failing with scalar numpy array (GH-59053) (#63974),3,12,2,14,2026-03-03 00:39:57.594918
+bb0d1cb5af55b9696ea05ab1566eb381f40fc0bc,sharmasanchitrishi@gmail.com,Sanchit Rishi,2026-02-03 21:05:49+00:00,"DOC: Add py:type reference targets to pandas.api.typing.aliases (#63812)
+
+Co-authored-by: Philipp Angerer <flying-sheep@web.de>",1,146,70,216,2026-03-03 00:39:57.594918
+328420a08d0ffbe0f4c6ef309eccc8a0dbee59e9,kothe65@gmail.com,Álvaro Kothe,2026-02-03 19:00:05+00:00,STY:(5/5) enforce B905 (#63999),57,133,161,294,2026-03-03 00:39:57.594918
+8706276fb93a9aad18f6bcc09de84a32a6d1c64a,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-03 17:52:57+00:00,PERF: use self._offset instead property (#64001),1,4,4,8,2026-03-03 00:39:57.594918
+f559f3e93d2f595c71b4774ee7113e52723c8183,kothe65@gmail.com,Álvaro Kothe,2026-02-03 17:50:06+00:00,STY: (1/5) enforce b905 for frame tests (#63995),21,125,85,210,2026-03-03 00:39:57.594918
+90ec57360ea42fefae68dc624027553befc9064e,74678373+agnuspaul98@users.noreply.github.com,Agnus Paul,2026-02-03 17:48:54+00:00,DOC: fix grammar in text data user guide (#64003),1,1,1,2,2026-03-03 00:39:57.594918
+5b55fff6f3ec1275cc5c27355fa523959e69972c,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-03 17:45:48+00:00,REGR: pivot_table with empty values inconsistency (#63979),3,110,21,131,2026-03-03 00:39:57.594918
+bdb3d7262f333eb31bcf39da94eb1fbfc467de0f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-03 17:41:00+00:00,DOC: Fix ES01 for pandas.Series.dt (#64000),6,117,67,184,2026-03-03 00:39:57.594918
+5eb11108aaf93f1b2b5ab419a793692eed9949c4,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-02 18:23:22+00:00,PERF: use private variables directly for CustomBusinessDay (#63984),1,7,7,14,2026-03-03 00:39:57.594918
+b95e8384840bb6a14dc0d06510043f1ab7f91287,66853113+pre-commit-ci[bot]@users.noreply.github.com,pre-commit-ci[bot],2026-02-02 18:20:23+00:00,"[pre-commit.ci] pre-commit autoupdate (#63989)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,3,3,6,2026-03-03 00:39:57.594918
+94ab0252526e795216c5cf7e6d19e802760cde40,ruifengz@apache.org,Ruifeng Zheng,2026-02-02 18:17:50+00:00,DEPR: Deprecate decorator Appender and Substitution (#63846),1,14,0,14,2026-03-03 00:39:57.594918
+e3e2b1f2454a6e2f7b61d035cfc8dae71c5df3f2,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-02 18:16:06+00:00,DOC: Fix ES01 for pandas.api.extensions.ExtensionArray (#63986),2,89,25,114,2026-03-03 00:39:57.594918
+7d823ba353c3e17fa9f929605adc5526f25ffd30,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-02 18:15:15+00:00,DOC: Fix ES01 for pandas.tseries.offsets.DateOffset (#63985),2,31,286,317,2026-03-03 00:39:57.594918
+3a5b4c26c1cbdabbd7c47bd60777d5f017bf469d,star1327p@gmail.com,Christine P. Chai,2026-02-02 03:24:00+00:00,DOC: Correct a few minor wording mistakes (#63982),4,5,5,10,2026-03-03 00:39:57.594918
+4a69a23f4e1e73b67c9222f5cd40ebbdc745c641,yuanx749@gmail.com,Xiao Yuan,2026-02-02 02:23:50+00:00,ENH: Make print_thing respect display.precision for float sequence (#63890),5,19,4,23,2026-03-03 00:39:57.594918
+c76570c646505a06a9172c314e70417441be72ec,159573770+Julian-Harbeck@users.noreply.github.com,Julian-Harbeck,2026-02-02 02:16:49+00:00,BUG: Fix comparison_op for zerodim ndarray subclasses (#63659),3,48,2,50,2026-03-03 00:39:57.594918
+0bc438f6205cf2ffe3db28c4f7a8f4994e5cf463,shmrck206@gmail.com,John Patrick Gallagher,2026-02-01 20:08:14+00:00,"DOC: Replace @doc decorators with inline docstrings in indexing.py #62437 (#63970)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,487,6,493,2026-03-03 00:39:57.594918
+0f4a433908c6f4dfe1ee1614976ea902a719544a,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-01 20:04:35+00:00,DOC: Consolidate migration guides (#63971),3,370,362,732,2026-03-03 00:39:57.594918
+872cbfb3abc402a5adf1983904ff01c649869c73,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-01 20:01:23+00:00,PERF: Use private variables directly for BusinessHour (#63972),1,7,7,14,2026-03-03 00:39:57.594918
+84c9ebf7692c749613d27051518d0d01a8357494,tuhinsharma121@gmail.com,Tuhin Sharma,2026-02-01 19:59:44+00:00,TST: Add explicit docstring tests for ES01 (#63966),1,855,1,856,2026-03-03 00:39:57.594918
+db04e7f33b990b6bafd68f3041652d522f5f4b97,22385371+wjandrea@users.noreply.github.com,William Andrea,2026-02-01 19:58:05+00:00,DOC: fix to_string defaults (#63976),1,4,4,8,2026-03-03 00:39:57.594918
+445ea2a5fae2fd7fe274c51a877f008d43341f9e,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-02-01 19:56:30+00:00,TST: Improve pivot_table test asserts (#63978),1,63,5,68,2026-03-03 00:39:57.594918
+9591444e34cf6974fd227ee321c18d2eb6c3a003,alonme@users.noreply.github.com,alm,2026-02-01 19:46:07+00:00,PERF: Skip normalization of named aggregations in groupby.agg when possible (#63743),2,49,5,54,2026-03-03 00:39:57.594918
+b490dfac9b998d88cc819da001a6c0a20a896925,thierry.moisan@gmail.com,Thierry Moisan,2026-02-01 19:07:21+00:00,CLN: Enable ruff rule RUF007 (pairwise-over-zipped) (#63977),5,10,8,18,2026-03-03 00:39:57.594918
+41968da5f87873dd49b2cff1da853c90181f7f89,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-31 21:29:01+00:00,PERF: Use private variables directly instead via property for BusinessDay (#63968),1,12,12,24,2026-03-03 00:39:57.594918
+97aec4777843cfdfe12e1226b2f6c54c83c3e82a,63069720+eicchen@users.noreply.github.com,Eric Chen,2026-01-31 18:40:32+00:00,"BUG: NotImplementedError: eq not implemented for <class 'range'> when comparing columns and range in pandas 3.0.0rc0 with pyarrow (#63802)
+
+Co-authored-by: Matthew Roeschke <10647082+mroeschke@users.noreply.github.com>",4,13,4,17,2026-03-03 00:39:57.594918
+f78bf299822cc9f7674c8d6a62748480e45cce50,50573808+kjmin622@users.noreply.github.com,Jeongmin Gil,2026-01-31 18:26:56+00:00,BUG: unary operators not supported with pd.col (issue#63939) (#63945),3,37,0,37,2026-03-03 00:39:57.594918
+f8f1437b65228006210d2eca5257b66c9a566dea,shmrck206@gmail.com,John Patrick Gallagher,2026-01-31 18:21:02+00:00,"DOC: Replace @doc decorators in pandas/core/indexing.py #62437 (#63958)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,109,2,111,2026-03-03 00:39:57.594918
+03c1ce9500f84d9217b3d90da7709267af463c21,20931105+DJHills@users.noreply.github.com,David Hills,2026-01-31 18:17:59+00:00,DOC: Small grammatical fixes to the documentation (#63960),2,8,7,15,2026-03-03 00:39:57.594918
+3766a73d48148a2e5621f20fb655929ee3eeac8c,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-31 18:15:32+00:00,REGR: groupby with categorical and NA values gives incorrect groups (#63961),3,52,0,52,2026-03-03 00:39:57.594918
+a4523484f6267501ae0bc240c5baf2108c622373,flying-sheep@web.de,Philipp A.,2026-01-31 13:21:44+00:00,"BUG: Allow ExtensionArray to use void dtype (#61637)
+
+Co-authored-by: Richard Shadrach <45562402+rhshadrach@users.noreply.github.com>",4,95,1,96,2026-03-03 00:39:57.594918
+433b140936aadec0f42c46e4e827f6f545569bbc,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 21:24:12+00:00,"DOC: Fix PR02,SA01 for pandas.tseries.offsets.CustomBusinessHour (#63952)",3,10,3,13,2026-03-03 00:39:57.594918
+9f238ba4868060695bdf26b6d0b9663d0f777f1e,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-30 20:22:32+00:00,DOC: Add whatsnew for 3.1.0 (#63956),2,220,0,220,2026-03-03 00:39:57.594918
+1058c32c6cf29eee0cc11f18c44f8d991738f1d7,vkverma9534@gmail.com,Vikram Kumar,2026-01-30 19:18:05+00:00,DOC: add time-distance weighted rolling aggregation example (#63951),1,42,0,42,2026-03-03 00:39:57.594918
+8d7afc70272ed489ce4673b52c8468f166e69620,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 19:00:38+00:00,DOC: Fix GL08 for pandas.tseries.offsets.WeekOfMonth.is_on_offset (#63953),2,41,3,44,2026-03-03 00:39:57.594918
+e4c08f830b9173cebe1afe2c724942e67a87b393,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 17:56:11+00:00,DOC: Fix ES01 for pandas.Period.year (#63950),1,3,0,3,2026-03-03 00:39:57.594918
+d62406248fecced5cc5d89df42b658f24dc3b01f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 17:54:43+00:00,DOC: Fix ES01 for pandas.tseries.offsets.DateOffset.name (#63949),1,3,0,3,2026-03-03 00:39:57.594918
+f0161bc7a55bb84c7bee602d93e3ae2fd4f0e082,33677443+evensong@users.noreply.github.com,evensong,2026-01-30 17:24:48+00:00,DOC Replace @doc decorator with inline docstring in core/arrays/sparse/array.py (#63941),1,29,2,31,2026-03-03 00:39:57.594918
+f838fd380bfc35a52391cb8274225bed87944706,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 17:23:03+00:00,DOC: Fix GL08 for pandas.tseries.offsets.SemiMonthBegin.rule_code (#63948),2,24,2,26,2026-03-03 00:39:57.594918
+3cb85ce77e30868b54dbcfa9be2c12f9b98a23af,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 17:22:23+00:00,DOC: Fix GL08 for pandas.tseries.offsets.FY5253Quarter.is_on_offset (#63947),2,34,1,35,2026-03-03 00:39:57.594918
+e636b0bfb047fa4cd8726b85a1ac246282af311a,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-30 17:21:36+00:00,"DOC: Fix ES01,PR02,SA01 for pandas.tseries.offsets.BusinessHour (#63946)",3,14,2,16,2026-03-03 00:39:57.594918
+924573a012670e87b239922a81fa2a245d3db2bb,129327798+accountTimo@users.noreply.github.com,Timo,2026-01-29 23:56:51+00:00,"DOC: Inline docstrings in pandas/io/excel/_odfreader.py (GH#62437) (#63943)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,9,4,13,2026-03-03 00:39:57.594918
+c7d37af7bed64451771765dc2b02ff1b39ed4a14,55852668+littleKitchen@users.noreply.github.com,littleKitchen,2026-01-29 23:54:27+00:00,DOC: Inline docstring for GroupByPositionalSelector (#63944),1,79,5,84,2026-03-03 00:39:57.594918
+1bfa143418b9542e482d98ad006e02e6da935a54,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 21:26:11+00:00,"DOC: Fix PR02,SA01 for pandas.tseries.offsets.CDay (#63929)",3,6,3,9,2026-03-03 00:39:57.594918
+89bf2e7a55038a0f68ccaf51befe7cfe37787472,74678373+agnuspaul98@users.noreply.github.com,Agnus Paul,2026-01-29 17:48:04+00:00,DOC: Fix typo in text data user guide (#63930),1,1,1,2,2026-03-03 00:39:57.594918
+eb2c18959b6fe2442a569c4cd8820130974386ba,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:54:10+00:00,"DOC: Fix PR02,SA01 for pandas.tseries.offsets.BDay (#63928)",3,36,4,40,2026-03-03 00:39:57.594918
+7a9418a6438a4d7e7ad76f17372e3a4e31f91fc0,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:53:23+00:00,DOC: Fix GL08 for pandas.tseries.offsets.SemiMonthEnd.is_on_offset (#63926),2,38,1,39,2026-03-03 00:39:57.594918
+608bf344346067af8cdb9a3194e065d849812a48,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:52:50+00:00,DOC: Fix GL08 for pandas.tseries.offsets.Week.is_on_offset (#63927),2,38,1,39,2026-03-03 00:39:57.594918
+4f2a1b52f5945899ca4014401a9a9e561ce745e1,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:52:00+00:00,DOC: Fix GL08 for pandas.tseries.offsets.Easter.is_on_offset (#63922),2,31,1,32,2026-03-03 00:39:57.594918
+d638d8b0ea11feccb80cb1e07619bb1977e1dd8f,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:51:24+00:00,DOC: Fix GL08 for pandas.tseries.offsets.FY5253Quarter.rule_code (#63923),2,36,1,37,2026-03-03 00:39:57.594918
+6e920049e53e195e69440c38c9c517ab4f3b3855,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-29 16:48:35+00:00,DOC: Fix GL08 for pandas.tseries.offsets.SemiMonthBegin.is_on_offset (#63924),2,38,1,39,2026-03-03 00:39:57.594918
+0cedc9f90fef1671404815e3b033d219d55e8409,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-01-29 09:12:31+00:00,BUG: still use object dtype for pyarrow-backed IO methods with infer_strings disabled (#63900),6,69,31,100,2026-03-03 00:39:57.594918
+654a8105b71de6a9caa49322c7abd3e60bf68743,vkverma9534@gmail.com,Vikram Kumar,2026-01-28 22:36:28+00:00,"BUG: Correct length_of_indexer for range objects (#63872)
+
+Co-authored-by: Richard Shadrach <45562402+rhshadrach@users.noreply.github.com>",2,26,1,27,2026-03-03 00:39:57.594918
+04a70121b0f50fdb94d5442415ce4ffc6defb64a,rafeekmagdy28@gmail.com,iRAFEEK,2026-01-28 21:13:47+00:00,"DOC: Add guide links to relevant API docs (#62650)
+
+Co-authored-by: Aidan Feldman <aidan.feldman@gmail.com>
+Co-authored-by: Matthew Roeschke <10647082+mroeschke@users.noreply.github.com>",11,33,0,33,2026-03-03 00:39:57.594918
+a45060f771d7d8597142d5db9ba4dcbcedf217bd,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-01-28 21:04:26+00:00,BUG: fix CoW handling of DataFrame(index/series) constructor (#63908),4,86,11,97,2026-03-03 00:39:57.594918
+c1839e5f15600b95454691c37fe69a265a853aeb,jorisvandenbossche@gmail.com,Joris Van den Bossche,2026-01-28 18:25:04+00:00,TST: mark plotting backend tests as single-threaded (#63911),1,2,0,2,2026-03-03 00:39:57.594918
+e9428b2de44a6f2b999097376285cb46fb3419c2,tuhinsharma121@gmail.com,Tuhin Sharma,2026-01-28 18:14:40+00:00,DOC: Fix PR02 for pandas.tseries.offsets.CBMonthBegin (#63878),3,66,10,76,2026-03-03 00:39:57.594918
+8e7ed0f165277c49b8ce27230cc57c6392dfbfdc,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-28 12:53:21+00:00,TST: Remove Windows ARROW_TIMEZONE_DATABASE xfails for PyArrow>=22 (#63905),4,59,2,61,2026-03-03 00:39:57.594918
+db6c5464249aff88ad1c755f73993be8cdbf3ad5,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-28 08:05:06+00:00,CI: Simplify docs build with workflow_dispatch (#63852),2,11,13,24,2026-03-03 00:39:57.594918
+0040254efc0344499071b3715c20ac870c7624ba,chaitanyakumar435@outlook.com,Chaitanya Dasari,2026-01-28 03:11:44+00:00,"DOC: Add User Guide links to GroupBy aggregate, transform, and apply methods (#63837)",2,14,0,14,2026-03-03 00:39:57.594918
+5cc8dd6ed6c827e92dfb56d1e182ea1bf0fe780a,91160475+natmokval@users.noreply.github.com,Natalia Mokeeva,2026-01-28 01:13:04+00:00,ENH: Raise TypeError when not np.busdaycalendar is passed to custom subclasses (#63854),2,11,0,11,2026-03-03 00:39:57.594918
+36dd70a54759b948f6a3f1fa5bab20098328f2e7,queita02@gmail.com,kei-0021,2026-01-27 22:17:42+00:00,"STY: add strict=True to zip() in pandas/tests/series/indexing (#63882)
+
+Co-authored-by: kei-0021 <quita02@gmail.com>",2,1,2,3,2026-03-03 00:39:57.594918
+309b2c9b5434df458e88ca4ccfffc6443ad6ae38,doug@kmnr.org,Doug McGeehan,2026-01-27 18:08:54+00:00,DOC: minor alignment fixes to `pandas.melt()` docstring (#63869),1,9,9,18,2026-03-03 00:39:57.594918
+816e933fca82752535ca51a33f9aa57d76f1cc74,luannguyenthanh299@gmail.com,rgttrhhyj,2026-01-27 18:06:26+00:00,TST: add regression test for GH#46294 (#63897),1,19,0,19,2026-03-03 00:39:57.594918
+2b09bec99eb32b7fbc6927e27c8d89e009699116,10647082+mroeschke@users.noreply.github.com,Matthew Roeschke,2026-01-27 17:54:22+00:00,DOC: Add AI contribution guidelines and clarify other contribution policies (#63891),2,45,10,55,2026-03-03 00:39:57.594918
+63da76e59d010cfd82ce093f847a74c3708c10ea,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-27 17:32:38+00:00,TST: xfail PyArrow 23.0 failures (#63895),5,13,5,18,2026-03-03 00:39:57.594918
+065fd69d2cbaf4d87ca3ca500638612c726f65ec,luannguyenthanh299@gmail.com,rgttrhhyj,2026-01-27 17:29:49+00:00,TST: add regression test for xs/loc mismatch on MultiIndex timeIndex (#19451) (#63746),1,25,0,25,2026-03-03 00:39:57.594918
+98ffe4c45edbfb9100aa8ee982ebc3f1f1453ed7,45562402+rhshadrach@users.noreply.github.com,Richard Shadrach,2026-01-27 04:58:24+00:00,TST: Remove Windows ARROW_TIMEZONE_DATABASE xfails (#63894),3,2,54,56,2026-03-03 00:39:57.594918

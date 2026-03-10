@@ -1,12 +1,7 @@
-"""
-Run Model Training Pipeline
-Trains and evaluates ML models for bug prediction
-"""
 
 import sys
 from pathlib import Path
 
-# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import logging
@@ -18,7 +13,6 @@ from src.training.train_model import ModelTrainer
 from src.training.evaluate import ModelEvaluator
 from src.utils.config_loader import ConfigLoader
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -29,21 +23,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 def main():
-    """
-    Main training pipeline
-    """
     logger.info("=" * 70)
     logger.info("STARTING MODEL TRAINING PIPELINE")
     logger.info("=" * 70)
     
     try:
-        # Load configuration
         config_loader = ConfigLoader()
         config = config_loader.load_main_config()
         
-        # Get settings
         training_config = config['training']
         features_path = "data/features/commit_features.csv"
         models_dir = "models"
@@ -51,12 +39,10 @@ def main():
         logger.info(f"Features input: {features_path}")
         logger.info(f"Models output: {models_dir}")
         
-        # Load features
         logger.info("Loading features...")
         features_df = pd.read_csv(features_path)
         logger.info(f"Loaded {len(features_df)} samples with {len(features_df.columns)} features")
         
-        # Check label distribution
         if 'is_buggy' in features_df.columns:
             bug_ratio = features_df['is_buggy'].mean()
             logger.info(f"Bug ratio: {bug_ratio:.2%}")
@@ -67,15 +53,12 @@ def main():
             logger.error("Label column 'is_buggy' not found!")
             raise ValueError("Missing label column")
         
-        # Initialize MLflow
         mlflow_config = config.get('mlflow', {})
         mlflow.set_tracking_uri(mlflow_config.get('tracking_uri', 'file:./models/registry'))
         mlflow.set_experiment(mlflow_config.get('experiment_name', 'commit_risk_scoring'))
         
-        # Initialize trainer
         trainer = ModelTrainer(config=training_config)
         
-        # Prepare data
         logger.info("Preparing data...")
         X_train, X_test, y_train, y_test = trainer.prepare_data(
             features_df,
@@ -84,38 +67,31 @@ def main():
             use_time_split=training_config.get('use_time_split', True)
         )
         
-        # Handle class imbalance
         imbalance_method = training_config.get('imbalance_method', 'class_weight')
         if training_config.get('handle_imbalance', True):
             if imbalance_method == 'SMOTE':
                 X_train, y_train = trainer.handle_imbalance(X_train, y_train, method='smote')
         
-        # Initialize evaluator
         evaluator = ModelEvaluator()
         
-        # Train and evaluate models
         logger.info("=" * 70)
         logger.info("TRAINING MODELS")
         logger.info("=" * 70)
         
-        # Model 1: Logistic Regression
         if training_config['models']['logistic_regression']['enabled']:
             logger.info("\n--- Training Logistic Regression (Baseline) ---")
             
             with mlflow.start_run(run_name="logistic_regression"):
-                # Train
                 lr_model = trainer.train_baseline(
                     X_train, y_train,
                     class_weight='balanced'
                 )
                 
-                # Evaluate
                 lr_metrics = evaluator.evaluate_model(
                     lr_model, X_test, y_test,
                     model_name="Logistic Regression"
                 )
                 
-                # Log to MLflow
                 mlflow.log_params(training_config['models']['logistic_regression']['params'])
                 mlflow.log_metrics({
                     'accuracy': lr_metrics['accuracy'],
@@ -125,32 +101,26 @@ def main():
                     'roc_auc': lr_metrics['roc_auc']
                 })
                 
-                # Save model
                 trainer.save_model(lr_model, 'baseline_logistic', models_dir)
                 mlflow.sklearn.log_model(lr_model, "model")
                 
-                # Print confusion matrix
                 evaluator.print_confusion_matrix("Logistic Regression")
         
-        # Model 2: XGBoost
         if training_config['models']['xgboost']['enabled']:
             logger.info("\n--- Training XGBoost (Advanced) ---")
             
             with mlflow.start_run(run_name="xgboost"):
-                # Train
                 xgb_params = training_config['models']['xgboost']['params']
                 xgb_model = trainer.train_xgboost(
                     X_train, y_train,
                     params=xgb_params
                 )
                 
-                # Evaluate
                 xgb_metrics = evaluator.evaluate_model(
                     xgb_model, X_test, y_test,
                     model_name="XGBoost"
                 )
                 
-                # Log to MLflow
                 mlflow.log_params(xgb_params)
                 mlflow.log_metrics({
                     'accuracy': xgb_metrics['accuracy'],
@@ -160,20 +130,16 @@ def main():
                     'roc_auc': xgb_metrics['roc_auc']
                 })
                 
-                # Save model
                 trainer.save_model(xgb_model, 'advanced_xgboost', models_dir)
                 mlflow.sklearn.log_model(xgb_model, "model")
                 
-                # Print confusion matrix
                 evaluator.print_confusion_matrix("XGBoost")
                 
-                # Feature importance
                 importance = trainer.get_feature_importance('xgboost', top_n=10)
                 logger.info("\nTop 10 Important Features (XGBoost):")
                 for idx, row in importance.iterrows():
                     logger.info(f"  {row['feature']:25s}: {row['importance']:.4f}")
         
-        # Compare models
         logger.info("\n" + "=" * 70)
         logger.info("MODEL COMPARISON")
         logger.info("=" * 70)
@@ -181,15 +147,12 @@ def main():
         comparison = evaluator.compare_models()
         logger.info("\n" + str(comparison))
         
-        # Select best model
         primary_metric = config['evaluation'].get('primary_metric', 'recall')
         best_model_name = evaluator.select_best_model(primary_metric)
         
-        # Generate summary report
         summary = evaluator.generate_summary_report()
         logger.info("\n" + summary)
         
-        # Save summary to file
         summary_path = f"{models_dir}/training_summary.txt"
         with open(summary_path, 'w') as f:
             f.write(summary)
@@ -214,7 +177,6 @@ def main():
         import traceback
         logger.error(traceback.format_exc())
         raise
-
 
 if __name__ == "__main__":
     main()

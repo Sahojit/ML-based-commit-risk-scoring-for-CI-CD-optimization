@@ -1,39 +1,15 @@
-# ==============================================================================
-# DATABASE CONFIGURATION
-# ==============================================================================
-
-# -----------------------------------------------------------------------------
-# POSTGRESQL CONNECTION SETTINGS
-# -----------------------------------------------------------------------------
 database:
-  # Database type
   type: "postgresql"
-  
-  # Connection parameters (use environment variables for sensitive data)
-  host: "${DB_HOST:localhost}"           # Default: localhost
-  port: "${DB_PORT:5432}"                # Default: 5432
-  database: "${DB_NAME:commit_risk_db}"  # Default: commit_risk_db
-  
-  # Credentials (NEVER hardcode these!)
-  # These will be loaded from .env file
+  host: "${DB_HOST:localhost}"
+  port: "${DB_PORT:5432}"
+  database: "${DB_NAME:commit_risk_db}"
   username: "${DB_USERNAME}"
   password: "${DB_PASSWORD}"
-  
-  # Connection pool settings
   pool:
     min_size: 2
     max_size: 10
     timeout_seconds: 30
-  
-  # SQLAlchemy connection string
-  # Format: postgresql://username:password@host:port/database
-  # Will be constructed from above values
-
-# -----------------------------------------------------------------------------
-# TABLE SCHEMAS
-# -----------------------------------------------------------------------------
 tables:
-  # Raw commit data
   raw_commits:
     name: "raw_commits"
     columns:
@@ -45,8 +21,6 @@ tables:
       - lines_added
       - lines_deleted
       - created_at
-  
-  # Bug labels
   labels:
     name: "labels"
     columns:
@@ -55,8 +29,6 @@ tables:
       - labeled_by
       - confidence
       - created_at
-  
-  # Engineered features
   commit_features:
     name: "commit_features"
     columns:
@@ -71,8 +43,6 @@ tables:
       - day_of_week
       - is_weekend
       - created_at
-  
-  # Developer statistics
   developer_features:
     name: "developer_features"
     columns:
@@ -81,8 +51,6 @@ tables:
       - bug_rate
       - recent_frequency
       - updated_at
-  
-  # Prediction logs
   predictions:
     name: "predictions"
     columns:
@@ -91,8 +59,6 @@ tables:
       - risk_score
       - model_version
       - predicted_at
-  
-  # Decision logs
   decisions:
     name: "decisions"
     columns:
@@ -101,8 +67,6 @@ tables:
       - decision
       - threshold_used
       - created_at
-  
-  # Explanations
   explanations:
     name: "explanations"
     columns:
@@ -111,8 +75,6 @@ tables:
       - explanation_text
       - top_features
       - created_at
-  
-  # Model metadata
   model_metadata:
     name: "model_metadata"
     columns:
@@ -121,20 +83,7 @@ tables:
       - metrics
       - deployed_at
       - status
-
-# -----------------------------------------------------------------------------
-# DATABASE INITIALIZATION
-# -----------------------------------------------------------------------------
 initialization:
-  # Create tables on startup if they don't exist
   auto_create_tables: true
-  
-  # Drop existing tables (DANGEROUS - only use in dev!)
   drop_existing: false
-  
-  # Run migrations
   run_migrations: false
-
-# ==============================================================================
-# END OF DATABASE CONFIGURATION
-# ==============================================================================

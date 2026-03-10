@@ -1,7 +1,3 @@
-"""
-Model Training
-Trains baseline and advanced models for bug prediction
-"""
 
 import sys
 from pathlib import Path
@@ -18,26 +14,15 @@ from xgboost import XGBClassifier
 from imblearn.over_sampling import SMOTE
 import joblib
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-
 class ModelTrainer:
-    """
-    Trains ML models for bug prediction
-    """
     
     def __init__(self, config: dict = None):
-        """
-        Initialize ModelTrainer
-        
-        Args:
-            config: Training configuration
-        """
         self.config = config or {}
         self.scaler = StandardScaler()
         self.models = {}
@@ -52,21 +37,8 @@ class ModelTrainer:
         random_state: int = 42,
         use_time_split: bool = True
     ):
-        """
-        Prepare data for training
-        
-        Args:
-            features_df: DataFrame with features and labels
-            test_size: Proportion of data for testing
-            random_state: Random seed
-            use_time_split: Use time-based split instead of random
-        
-        Returns:
-            X_train, X_test, y_train, y_test
-        """
         logger.info(f"Preparing data: {len(features_df)} samples")
         
-        # Separate features and labels
         label_col = 'is_buggy'
         exclude_cols = ['commit_hash', 'author', 'is_buggy', 'timestamp']
         
@@ -79,13 +51,10 @@ class ModelTrainer:
         logger.info(f"Features: {len(feature_cols)} columns")
         logger.info(f"Labels: {len(y)} samples")
         
-        # Handle missing values
         X = X.fillna(0)
         
-        # Time-based or random split
         if use_time_split and 'timestamp' in features_df.columns:
             logger.info("Using time-based train/test split")
-            # Sort by timestamp
             features_df = features_df.sort_values('timestamp')
             split_idx = int(len(features_df) * (1 - test_size))
             
@@ -96,7 +65,6 @@ class ModelTrainer:
         else:
             logger.info("Using random train/test split")
             
-            # Check if stratification is possible
             min_class_count = y.value_counts().min()
             use_stratify = min_class_count >= 2
             
@@ -113,7 +81,6 @@ class ModelTrainer:
         logger.info(f"Training bug ratio: {y_train.mean():.2%}")
         logger.info(f"Test bug ratio: {y_test.mean():.2%}")
         
-        # Store feature names
         self.feature_names = feature_cols
         
         return X_train, X_test, y_train, y_test
@@ -124,26 +91,13 @@ class ModelTrainer:
         y_train: pd.Series,
         method: str = 'class_weight'
     ):
-        """
-        Handle class imbalance
-        
-        Args:
-            X_train: Training features
-            y_train: Training labels
-            method: 'class_weight' or 'smote'
-        
-        Returns:
-            X_train, y_train (potentially resampled)
-        """
         logger.info(f"Handling class imbalance using: {method}")
         
-        # Check if we have both classes
         n_classes = y_train.nunique()
         if n_classes < 2:
             logger.warning(f"⚠️  Only {n_classes} class in training data. Skipping imbalance handling.")
             return X_train, y_train
         
-        # Check minimum samples per class for SMOTE
         min_samples = y_train.value_counts().min()
         
         if method == 'smote':
@@ -165,17 +119,6 @@ class ModelTrainer:
         y_train: pd.Series,
         class_weight: str = 'balanced'
     ):
-        """
-        Train baseline Logistic Regression model
-        
-        Args:
-            X_train: Training features
-            y_train: Training labels
-            class_weight: How to handle class imbalance
-        
-        Returns:
-            Trained model
-        """
         logger.info("Training baseline model (Logistic Regression)...")
         
         model = LogisticRegression(
@@ -197,20 +140,8 @@ class ModelTrainer:
         y_train: pd.Series,
         params: dict = None
     ):
-        """
-        Train XGBoost model
-        
-        Args:
-            X_train: Training features
-            y_train: Training labels
-            params: XGBoost parameters
-        
-        Returns:
-            Trained model
-        """
         logger.info("Training advanced model (XGBoost)...")
         
-        # Default parameters
         default_params = {
             'max_depth': 6,
             'learning_rate': 0.1,
@@ -231,14 +162,6 @@ class ModelTrainer:
         return model
     
     def save_model(self, model, model_name: str, output_dir: str = "models"):
-        """
-        Save trained model to disk
-        
-        Args:
-            model: Trained model
-            model_name: Name for the model file
-            output_dir: Directory to save model
-        """
         Path(output_dir).mkdir(parents=True, exist_ok=True)
         
         filepath = f"{output_dir}/{model_name}.pkl"
@@ -247,16 +170,6 @@ class ModelTrainer:
         logger.info(f"Model saved to {filepath}")
     
     def get_feature_importance(self, model_name: str, top_n: int = 10) -> pd.DataFrame:
-        """
-        Get feature importance from trained model
-        
-        Args:
-            model_name: Name of the model
-            top_n: Number of top features to return
-        
-        Returns:
-            DataFrame with feature importance
-        """
         if model_name not in self.models:
             logger.error(f"Model '{model_name}' not found")
             return None
@@ -264,10 +177,8 @@ class ModelTrainer:
         model = self.models[model_name]
         
         if hasattr(model, 'feature_importances_'):
-            # Tree-based models (XGBoost)
             importance = model.feature_importances_
         elif hasattr(model, 'coef_'):
-            # Linear models (Logistic Regression)
             importance = np.abs(model.coef_[0])
         else:
             logger.warning(f"Model '{model_name}' doesn't support feature importance")
@@ -280,17 +191,11 @@ class ModelTrainer:
         
         return importance_df
 
-
-# ==============================================================================
-# EXAMPLE USAGE
-# ==============================================================================
-
 if __name__ == "__main__":
     logger.info("=" * 70)
     logger.info("TESTING MODEL TRAINER")
     logger.info("=" * 70)
     
-    # Create sample data
     np.random.seed(42)
     n_samples = 100
     
@@ -310,22 +215,17 @@ if __name__ == "__main__":
     print(f"\nSample data: {len(sample_data)} commits")
     print(f"Bug ratio: {sample_data['is_buggy'].mean():.2%}")
     
-    # Initialize trainer
     trainer = ModelTrainer()
     
-    # Prepare data
     X_train, X_test, y_train, y_test = trainer.prepare_data(
         sample_data,
         use_time_split=False
     )
     
-    # Train baseline
     baseline_model = trainer.train_baseline(X_train, y_train)
     
-    # Train XGBoost
     xgb_model = trainer.train_xgboost(X_train, y_train)
     
-    # Get feature importance
     print("\nTop 5 important features (XGBoost):")
     importance = trainer.get_feature_importance('xgboost', top_n=5)
     print(importance)
