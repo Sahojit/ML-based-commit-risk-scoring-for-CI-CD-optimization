@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-
 import hashlib
 import hmac
 import logging
@@ -17,6 +15,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
+
 
 class CommitRequest(BaseModel):
     commit_hash: str = Field(..., description="Unique commit identifier")
@@ -41,87 +40,16 @@ class CommitRequest(BaseModel):
                 "lines_added": 150,
                 "lines_deleted": 50,
                 "files_changed": 8,
-=======
-"""
-FastAPI Inference API
-REST API for serving commit risk predictions
-"""
-
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-from typing import List, Optional
-from datetime import datetime
-import logging
-
-from src.inference.predictor import CommitPredictor
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
-# Initialize FastAPI app
-app = FastAPI(
-    title="ML Commit Risk Scoring API",
-    description="Predict bug risk for Git commits and optimize CI/CD testing",
-    version="1.0.0"
-)
-
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Initialize predictor (load model once at startup)
-predictor = None
-
-
-# ==============================================================================
-# PYDANTIC MODELS (Request/Response Schemas)
-# ==============================================================================
-
-class CommitRequest(BaseModel):
-    """Request schema for single commit prediction"""
-    commit_hash: str = Field(..., description="Git commit hash")
-    lines_added: int = Field(0, ge=0, description="Number of lines added")
-    lines_deleted: int = Field(0, ge=0, description="Number of lines deleted")
-    files_changed: int = Field(1, ge=1, description="Number of files changed")
-    touches_core: int = Field(0, ge=0, le=1, description="Touches core module (0 or 1)")
-    touches_tests: int = Field(0, ge=0, le=1, description="Touches test files (0 or 1)")
-    total_commits: int = Field(1, ge=1, description="Developer's total commits")
-    buggy_commits: int = Field(0, ge=0, description="Developer's buggy commits")
-    recent_frequency: int = Field(0, ge=0, description="Recent commit frequency")
-    timestamp: Optional[str] = Field(None, description="Commit timestamp (ISO format)")
-    
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "commit_hash": "abc123def456",
-                "lines_added": 120,
-                "lines_deleted": 45,
-                "files_changed": 5,
->>>>>>> Stashed changes
                 "touches_core": 1,
                 "touches_tests": 0,
                 "total_commits": 100,
                 "buggy_commits": 25,
                 "recent_frequency": 10,
-<<<<<<< Updated upstream
                 "timestamp": "2024-03-01 14:30:00",
             }
         }
     }
+
 
 class PredictionResponse(BaseModel):
     commit_hash: str
@@ -131,13 +59,16 @@ class PredictionResponse(BaseModel):
     recommendation: str
     prediction_time: str
 
+
 class BatchRequest(BaseModel):
     commits: List[CommitRequest]
+
 
 class BatchResponse(BaseModel):
     results: List[dict]
     total: int
     processed: int
+
 
 class HealthResponse(BaseModel):
     status: str
@@ -145,7 +76,9 @@ class HealthResponse(BaseModel):
     model_type: Optional[str] = None
     version: str = "1.0.0"
 
+
 _state: dict = {"predictor": None}
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -170,6 +103,7 @@ async def lifespan(app: FastAPI):
     _state["predictor"] = None
     logger.info("Shutdown complete.")
 
+
 app = FastAPI(
     title="ML Commit Risk Scoring API",
     description=(
@@ -190,6 +124,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/", response_model=HealthResponse, tags=["Health"])
 @app.get("/health", response_model=HealthResponse, tags=["Health"])
 def health():
@@ -209,6 +144,7 @@ def health():
         model_type=model_type,
     )
 
+
 @app.post("/predict", response_model=PredictionResponse, tags=["Prediction"])
 def predict(request: CommitRequest):
     predictor = _state["predictor"]
@@ -227,7 +163,6 @@ def predict(request: CommitRequest):
 
     try:
         from src.monitoring.metrics_collector import MetricsCollector
-
         MetricsCollector().log_prediction(
             commit_hash=result["commit_hash"],
             risk_score=result["risk_score"],
@@ -239,6 +174,7 @@ def predict(request: CommitRequest):
         pass
 
     return PredictionResponse(**result)
+
 
 @app.post("/predict/batch", response_model=BatchResponse, tags=["Prediction"])
 def predict_batch(request: BatchRequest):
@@ -257,6 +193,7 @@ def predict_batch(request: BatchRequest):
 
     processed = sum(1 for r in results if "error" not in r)
     return BatchResponse(results=results, total=len(results), processed=processed)
+
 
 @app.get("/model/info", tags=["Model"])
 def model_info():
@@ -301,7 +238,16 @@ async def github_webhook(request: Request):
         return {"status": "ignored", "event": event_type}
 
     try:
-        payload = await request.json()
+        import json as _json
+        from urllib.parse import parse_qs
+        if not body:
+            return {"status": "ignored", "reason": "empty_body"}
+        try:
+            payload = _json.loads(body)
+        except Exception:
+            form = parse_qs(body.decode("utf-8", errors="replace"))
+            raw = form.get("payload", ["{}"])[0]
+            payload = _json.loads(raw)
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON payload.")
 
@@ -317,185 +263,3 @@ async def github_webhook(request: Request):
 
     logger.info(f"Webhook processed: {result}")
     return result
-=======
-                "timestamp": "2024-03-01T14:30:00"
-            }
-        }
-
-
-class BatchCommitRequest(BaseModel):
-    """Request schema for batch prediction"""
-    commits: List[CommitRequest] = Field(..., description="List of commits to predict")
-
-
-class PredictionResponse(BaseModel):
-    """Response schema for prediction"""
-    commit_hash: str
-    risk_score: float = Field(..., description="Bug risk probability (0.0 to 1.0)")
-    risk_label: int = Field(..., description="Binary prediction (0=clean, 1=buggy)")
-    risk_level: str = Field(..., description="Risk level (LOW, MEDIUM, HIGH)")
-    recommendation: str = Field(..., description="Testing recommendation")
-    prediction_time: str = Field(..., description="Prediction timestamp")
-
-
-class HealthResponse(BaseModel):
-    """Response schema for health check"""
-    status: str
-    model_loaded: bool
-    model_type: Optional[str]
-    timestamp: str
-
-
-class ModelInfoResponse(BaseModel):
-    """Response schema for model information"""
-    status: str
-    model_type: str
-    model_path: str
-    num_features: int
-    feature_names: List[str]
-
-
-# ==============================================================================
-# STARTUP/SHUTDOWN EVENTS
-# ==============================================================================
-
-@app.on_event("startup")
-async def startup_event():
-    """Load model on startup"""
-    global predictor
-    try:
-        logger.info("Loading ML model...")
-        predictor = CommitPredictor()
-        logger.info("✅ Model loaded successfully")
-    except Exception as e:
-        logger.error(f"❌ Failed to load model: {e}")
-        predictor = None
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Cleanup on shutdown"""
-    logger.info("Shutting down API...")
-
-
-# ==============================================================================
-# API ENDPOINTS
-# ==============================================================================
-
-@app.get("/", response_model=HealthResponse)
-async def root():
-    """Health check endpoint"""
-    return {
-        "status": "healthy" if predictor else "unhealthy",
-        "model_loaded": predictor is not None,
-        "model_type": predictor.get_model_info()["model_type"] if predictor else None,
-        "timestamp": datetime.now().isoformat()
-    }
-
-
-@app.get("/health", response_model=HealthResponse)
-async def health_check():
-    """Detailed health check"""
-    if predictor is None:
-        raise HTTPException(status_code=503, detail="Model not loaded")
-    
-    return {
-        "status": "healthy",
-        "model_loaded": True,
-        "model_type": predictor.get_model_info()["model_type"],
-        "timestamp": datetime.now().isoformat()
-    }
-
-
-@app.post("/predict", response_model=PredictionResponse)
-async def predict_commit(commit: CommitRequest):
-    """Predict bug risk for a single commit"""
-    if predictor is None:
-        raise HTTPException(status_code=503, detail="Model not loaded")
-    
-    try:
-        import time
-        start_time = time.time()
-        
-        # Convert Pydantic model to dict
-        commit_data = commit.dict()
-        
-        # Make prediction
-        result = predictor.predict_commit(commit_data)
-        
-        # Calculate response time
-        response_time_ms = (time.time() - start_time) * 1000
-        
-        # Log prediction for monitoring
-        try:
-            from src.monitoring.metrics_collector import MetricsCollector
-            collector = MetricsCollector()
-            collector.log_prediction(
-                commit_hash=result['commit_hash'],
-                risk_score=result['risk_score'],
-                risk_level=result['risk_level'],
-                features=commit_data,
-                response_time_ms=response_time_ms
-            )
-        except Exception as e:
-            logger.warning(f"Failed to log prediction: {e}")
-        
-        return result
-    
-    except Exception as e:
-        logger.error(f"Prediction error: {e}")
-        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
-
-
-@app.post("/predict/batch", response_model=List[PredictionResponse])
-async def predict_batch(batch: BatchCommitRequest):
-    """Predict bug risk for multiple commits"""
-    if predictor is None:
-        raise HTTPException(status_code=503, detail="Model not loaded")
-    
-    try:
-        commits_data = [commit.dict() for commit in batch.commits]
-        results = predictor.predict_batch(commits_data)
-        return results
-    
-    except Exception as e:
-        logger.error(f"Batch prediction error: {e}")
-        raise HTTPException(status_code=500, detail=f"Batch prediction failed: {str(e)}")
-
-
-@app.get("/model/info", response_model=ModelInfoResponse)
-async def get_model_info():
-    """Get information about the loaded model"""
-    if predictor is None:
-        raise HTTPException(status_code=503, detail="Model not loaded")
-    
-    try:
-        info = predictor.get_model_info()
-        return info
-    
-    except Exception as e:
-        logger.error(f"Error getting model info: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to get model info: {str(e)}")
-
-
-# ==============================================================================
-# RUN SERVER (for testing)
-# ==============================================================================
-
-if __name__ == "__main__":
-    import uvicorn
-    
-    logger.info("=" * 70)
-    logger.info("STARTING FASTAPI SERVER")
-    logger.info("=" * 70)
-    logger.info("API will be available at: http://localhost:8000")
-    logger.info("Interactive docs at: http://localhost:8000/docs")
-    logger.info("=" * 70)
-    
-    uvicorn.run(
-        app,
-        host="0.0.0.0",
-        port=8000,
-        log_level="info"
-    )
->>>>>>> Stashed changes

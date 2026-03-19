@@ -1,8 +1,9 @@
 
+import os
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 import uvicorn
 import logging
@@ -29,7 +30,7 @@ def main():
     uvicorn.run(
         "src.inference.api:app",
         host="0.0.0.0",
-        port=8000,
+        port=int(os.environ.get("PORT", 8002)),
         reload=False,
         log_level="info"
     )
