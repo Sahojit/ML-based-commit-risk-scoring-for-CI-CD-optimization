@@ -1,11 +1,13 @@
 
+import hashlib
+import hmac
 import logging
 import os
 import time
 from contextlib import asynccontextmanager
 from typing import List, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -193,3 +195,52 @@ def model_info():
         return predictor.get_model_info()
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
+
+
+def _verify_github_signature(body: bytes, signature_header: Optional[str]) -> bool:
+    secret = os.environ.get("GITHUB_WEBHOOK_SECRET", "")
+    if not secret:
+        logger.warning("GITHUB_WEBHOOK_SECRET not set — skipping signature check.")
+        return True
+
+    if not signature_header or not signature_header.startswith("sha256="):
+        return False
+
+    expected = "sha256=" + hmac.new(
+        key=secret.encode(), msg=body, digestmod=hashlib.sha256
+    ).hexdigest()
+
+    return hmac.compare_digest(expected, signature_header)
+
+
+@app.post("/webhook/github", tags=["Webhook"])
+async def github_webhook(request: Request):
+    body = await request.body()
+    signature = request.headers.get("X-Hub-Signature-256")
+
+    if not _verify_github_signature(body, signature):
+        logger.warning("Webhook rejected: invalid signature.")
+        raise HTTPException(status_code=401, detail="Invalid signature.")
+
+    event_type = request.headers.get("X-GitHub-Event", "unknown")
+    if event_type != "push":
+        logger.info(f"Ignoring non-push event: {event_type}")
+        return {"status": "ignored", "event": event_type}
+
+    try:
+        payload = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid JSON payload.")
+
+    predictor = _state["predictor"]
+    if predictor is None:
+        raise HTTPException(status_code=503, detail="Model not loaded.")
+
+    from src.webhook.handler import process_push_event
+    from src.webhook import db_writer
+
+    db_writer.ensure_predictions_table()
+    result = process_push_event(payload, predictor)
+
+    logger.info(f"Webhook processed: {result}")
+    return result
