@@ -56,16 +56,15 @@ class CommitPredictor:
         touches_core = commit_data.get('touches_core', 0)
         touches_tests = commit_data.get('touches_tests', 0)
         
-        complexity_score = commit_data.get('complexity_score', 
-                                          min(total_churn / 500, 1.0))
-        
+        complexity_score = float(commit_data.get('complexity_score') or min(total_churn / 500, 1.0))
+
         total_commits = commit_data.get('total_commits', 1)
         buggy_commits = commit_data.get('buggy_commits', 0)
         bug_rate = buggy_commits / total_commits if total_commits > 0 else 0
         recent_frequency = commit_data.get('recent_frequency', 0)
-        avg_lines_added = commit_data.get('avg_lines_added', lines_added)
-        avg_lines_deleted = commit_data.get('avg_lines_deleted', lines_deleted)
-        avg_files_changed = commit_data.get('avg_files_changed', files_changed)
+        avg_lines_added = float(commit_data.get('avg_lines_added') or lines_added)
+        avg_lines_deleted = float(commit_data.get('avg_lines_deleted') or lines_deleted)
+        avg_files_changed = float(commit_data.get('avg_files_changed') or files_changed)
         
         timestamp = commit_data.get('timestamp', datetime.now())
         if isinstance(timestamp, str):
